@@ -1,0 +1,2496 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0064)https://www.freebuf.com/articles/security-management/192723.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>
+  萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆</title>
+<meta name="description" content="【一看就会】 是因为很多我尽可能写得很详细。 【一做就废】如果基础知识不牢固很多部分会懵逼。 本文章作者的等级保护项目相关坑点以及经验分享。本文知识点过于庞杂，有需要可以收录到自己的网页收藏夹。 萌新适…">
+<meta name="keywords" content="信息安全等级保护, 安全服务, 安全项目, 安全管理应急方法,安全管理解决方案,安全管理知识大全">
+<meta name="baidu-site-verification" content="nKKKqQxp6R">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit">
+<meta property="qc:admins" content="6620477777662552566375">
+<link rel="stylesheet" id="wpfp-css" href="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/wpfp.css" type="text/css">
+<link rel="stylesheet" id="wp-recentcomments-css" href="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/wp-recentcomments.css" type="text/css" media="screen">
+<link rel="stylesheet" id="mycred-widget-css" href="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/widget.css" type="text/css" media="all">
+<script type="text/javascript" src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/jquery.min.js.下载"></script>
+<script type="text/javascript" src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/wpfp.js.下载"></script>
+<link rel="prev" title="安全运营视角 | 安全思维模型解读谷歌零信任安全架构" href="https://www.freebuf.com/articles/network/193197.html">
+<link rel="next" title="数说2018，FreeBuf年度“网红”都有谁？" href="https://www.freebuf.com/news/193574.html">
+<link rel="canonical" href="https://www.freebuf.com/articles/security-management/192723.html">
+<link rel="shortlink" href="https://www.freebuf.com/?p=192723">
+
+<link rel="stylesheet" href="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/highslide.css" type="text/css">
+<script type="text/javascript" src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/highslide-with-html.packed.js.下载"></script>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+    hs.graphicsDir = "https://www.freebuf.com/buf/plugins/auto-highslide/images/graphics/";
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.addSlideshow({
+        interval: 5000,
+        repeat: true,
+        useControls: true,
+        fixedControls: "fit",
+        overlayOptions: {
+            opacity: 0.75,
+            position: "bottom center",
+            hideOnMouseOut: true
+
+        }
+
+    });
+});
+</script>
+          <script language="JavaScript" type="text/javascript" src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/script.js.下载"></script>
+        <script src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/layer.js.下载"></script><link rel="stylesheet" href="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/layer.css" id="layui_layer_skinlayercss" style="">
+      <link rel="stylesheet" type="text/css" href="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/style.css">
+      <script type="text/javascript" src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/highlight.pack.js.下载"></script><link type="text/css" rel="stylesheet" href="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/default.css">	<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<link rel="shortcut icon" href="https://static.freebuf.com/images/favicon.ico">
+<link rel="stylesheet" href="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/header.css">
+<link href="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/bootstrap.min.css" rel="stylesheet" media="screen">
+    <!--轮播图-->
+    <link href="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/swiper-3.4.2.min.css" rel="stylesheet" type="text/css">
+    <link href="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/style(1).css" rel="stylesheet" type="text/css">
+            <!-- column -->
+        <link href="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/column.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+#contenttxt hr {
+  display: block;
+  height: 0px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 15px 0;
+  padding: 0;
+}
+#contenttxt table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin: 15px 0;
+}
+#contenttxt table thead {
+  background-color: #f9f9f9;
+}
+#contenttxt table td, #contenttxt table th {
+  min-width: 40px;
+  height: 30px;
+  border: 1px solid #ccc;
+  vertical-align: top;
+  padding: 2px 4px;
+  text-align: left;
+  box-sizing: border-box;
+  white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -pre-wrap; white-space: -o-pre-wrap; word-wrap: break-word;
+}
+#contenttxt table td.active, #contenttxt table th.active {
+  background-color: #ffffee;
+  white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -pre-wrap; white-space: -o-pre-wrap; word-wrap: break-word;
+}
+@media (max-width: 480px) {
+    .main-header {
+        position: fixed !important;
+        top: 0;
+    }
+    .column-article {
+        margin-top: 65px;
+    }
+}
+
+</style>
+<script src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/jquery-2.0.3.min.js.下载"></script>
+<script src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/bootstrap.min.js.下载"></script>
+<script src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/slider.js.下载" type="text/javascript"></script>
+<script src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/jquery.sticky.js.下载" type="text/javascript"></script>
+<script src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/bjqs-1.3.min.js.下载" type="text/javascript"></script>
+<script src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/mosaic.1.0.1.min.js.下载" type="text/javascript"></script>
+<script type="text/javascript" src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/setint.js.下载"></script>
+    <!--轮播图-->
+    <script src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/swiper-3.4.2.min.js.下载"></script>
+<!--[if lt IE 9]>
+    <script src="https://www.freebuf.com/buf/themes/freebuf/js/html5shiv.min.js"></script>
+    <script src="https://www.freebuf.com/buf/themes/freebuf/js/respond.min.js"></script>
+<![endif]-->
+    <style>
+        @font-face {font-family: 'iconfont';
+            src: url('https://static.3001.net/iconfont/iconfont.eot'); /* IE9*/
+            src: url('https://static.3001.net/iconfont/iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+            url('https://static.3001.net/iconfont/iconfont.woff') format('woff'), /* chrome、firefox */
+            url('https://static.3001.net/iconfont/iconfonticonfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+            url('https://static.3001.net/iconfont/iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
+        }
+    </style>
+<style type="text/css">.highslide img {cursor: url(https://www.freebuf.com/buf/plugins/auto-highslide/images/graphics/zoomin.cur), pointer !important;}.highslide-viewport-size {position: fixed; width: 100%; height: 100%; left: 0; top: 0}</style></head>
+
+<body style="">
+<!----------header---------->
+<!--头部导航-->
+<div id="undefined-sticky-wrapper" class="sticky-wrapper is-sticky">
+    <div id="undefined-sticky-wrapper" class="sticky-wrapper" style="height: 65px;"><div id="undefined-sticky-wrapper" class="sticky-wrapper is-sticky" style="height: 65px;"><div class="main-header" style="position: fixed; top: 0px; display: none;">
+        <div class="header">
+            <div class="header-container clearfix">
+                                <div class="header-logo"><a href="http://zhuanlan.freebuf.com/"></a></div>
+                                <div class="header-right">
+                                    <div class="header-icon">
+                        <ul class="clearfix">
+                                                    </ul>
+                    </div>
+                    <div class="loginSign login-before">
+                        <div class="header-icon">
+                            <ul class="clearfix">
+                                <li class="icon-login"><a href="http://www.freebuf.com/oauth" target="_blank"><span>登录</span></a></li>
+                                <li class="icon-reg"><a href="https://account.tophant.com/register.html" target="_blank"><span>注册</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                                </div>
+                <div class="nav-small">
+                    <a href="https://www.freebuf.com/articles/security-management/192723.html#"></a>
+                    <ul class="nav-child clearfix">
+                                                <li><a href="http://my.freebuf.com/post/edit" target="_blank">投稿</a></li>
+                                                    <li><a href="https://account.tophant.com/register.html" class="login-btn">注册</a>
+                            </li>
+                            <li><a href="http://www.freebuf.com/oauth" class="sign-btn">登录</a></li>
+                                            </ul>
+                </div>
+            </div>
+            <div class="dropdown-menu read-menu" id="read-menu" style="">
+                <div class="container">
+                    <ul class="menu clearfix">
+                        <li>
+                            <strong>黑客</strong>
+                            <div class="nav-item">
+                                <a href="http://www.freebuf.com/vuls" target="_blank">漏洞</a>
+                                <a href="http://www.freebuf.com/sectool" target="_blank">安全工具</a>
+                                <a href="http://www.freebuf.com/articles/web" target="_blank">WEB安全</a>
+                                <a href="http://www.freebuf.com/articles/system" target="_blank">系统安全</a>
+                                <a href="http://www.freebuf.com/articles/network" target="_blank">网络安全</a>
+                                <a href="http://www.freebuf.com/articles/wireless" target="_blank">无线安全</a>
+                                <a href="http://www.freebuf.com/articles/terminal" target="_blank">设备/客户端安全</a>
+                                <a href="http://www.freebuf.com/articles/database" target="_blank">数据库安全</a>
+                                <a href="http://www.freebuf.com/articles/security-management" target="_blank">安全管理</a>
+                                <a href="http://www.freebuf.com/articles/es" target="_blank">企业安全</a>
+                                <a class="last" href="http://www.freebuf.com/ics-articles" target="_blank">工控安全</a>
+                            </div>
+                        </li>
+                        <li>
+                            <strong>极客</strong>
+                            <div class="nav-item">
+                                <a href="http://www.freebuf.com/geek" target="_blank">极客有意思</a>
+                                <a class="last" href="http://www.freebuf.com/news/others" target="_blank">周边</a>
+                            </div>
+                        </li>
+                        <li>
+                            <strong>特色</strong>
+                            <div class="nav-item">
+                                <a href="http://www.freebuf.com/news/special" target="_blank">头条</a>
+                                <a href="http://www.freebuf.com/articles/people" target="_blank">人物志</a>
+                                <a href="http://www.freebuf.com/fevents" target="_blank">活动</a>
+                                <a href="http://www.freebuf.com/video" target="_blank">视频</a>
+                                <a href="http://www.freebuf.com/articles/neopoints" target="_blank">观点</a>
+                                <a href="http://www.freebuf.com/jobs" target="_blank">招聘</a>
+                                <a href="http://www.freebuf.com/paper/" target="_blank">报告</a>
+                                <a href="http://www.freebuf.com/news" target="_blank">资讯</a>
+                                <a href="http://www.freebuf.com/articles/blockchain-articles" target="_blank">区块链安全</a>
+                                <a class="last" href="http://www.freebuf.com/open" target="_blank">公开课</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown-menu company-menu" id="company-menu" style="">
+                <div class="container">
+                    <ul class="menu">
+                        <li>
+                            <a href="https://www.vulbox.com/service/src" target="_blank">
+                                <span class="img"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon-src.png"></span>
+                                <span class="name">企业SRC</span>
+                                <span class="intro">全/半托管式互联网漏洞收集管理</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://company.freebuf.com/" target="_blank">
+                                <span class="img"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon-company.png"></span>
+                                <span class="name">企业空间</span>
+                                <span class="intro">为企业定制信息安全专属门户</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.vulbox.com/" target="_blank">
+                                <span class="img"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon-safety.png"></span>
+                                <span class="name">漏洞测试</span>
+                                <span class="intro">国内领先的互联网安全众测服务</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.riskivy.com/" target="_blank">
+                                <span class="img"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon-risk.png"></span>
+                                <span class="name">威胁监测</span>
+                                <span class="intro">新一代智能安全监测分析解决方案</span>
+                            </a>
+                        </li>
+                        <li class="last">
+                            <a>
+                                <span class="img"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/1559122728_5cee5328a1e62.png"></span>
+                                <span class="name" style="cursor: default">会员体系</span>
+                                <span class="intro clearfix"></span></a><a target="_blank" href="https://www.freebuf.com/vip/" style="width:58px;cursor: pointer;font-size: 12px" onmouseover="this.style.color=&#39;#E1C89A&#39;;" onmouseout="this.style.color=&#39;#fff&#39;;">我是甲方</a><span>/</span>
+                                <a target="_blank" href="https://company.freebuf.com/vip/" style="width:55px;cursor: pointer;font-size: 12px" onmouseover="this.style.color=&#39;#E1C89A&#39;;" onmouseout="this.style.color=&#39;#fff&#39;;">我是厂商</a>
+                            
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown-menu user-menu" id="user-menu" style="">
+                <div class="container">
+                    <ul class="menu">
+                        <li>
+                            <a href="http://shop.freebuf.com/" target="_blank">
+                                <span class="img"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon-shop.png"></span>
+                                <span class="name">商城</span>
+                                <span class="intro">用FB金币购物</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://www.freebuf.com/newsend" target="_blank">
+                                <span class="img"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon-write.png"></span>
+                                <span class="name">有奖投稿</span>
+                                <span class="intro">与整个行业分享你的经验与见解</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://zhuanlan.freebuf.com/" target="_blank">
+                                <span class="img"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon-column.png"></span>
+                                <span class="name">申请专栏</span>
+                                <span class="intro">自由创作，打造自主内容品牌</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.vulbox.com/bounties/detail-72" target="_blank">
+                                <span class="img"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon-leak.png"></span>
+                                <span class="name">提交漏洞</span>
+                                <span class="intro">与数万白帽一起，让互联网更安全</span>
+                            </a>
+                        </li>
+                        <li class="last">
+                            <a href="https://www.vulbox.com/bounties" target="_blank">
+                                <span class="img"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon-test.png"></span>
+                                <span class="name">参与众测</span>
+                                <span class="intro">挖洞开启自由职业之路</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown-menu wenku-menu" id="wenku-menu" style="">
+                <div class="container">
+                    <ul class="menu">
+                        <li>
+                            <a href="http://search.freebuf.com/search" target="_blank">
+                                <span class="img"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon-write.png"></span>
+                                <span class="name">文库</span>
+                                <span class="intro">FB百科大全</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://www.freebuf.com/special-subject" target="_blank">
+                                <span class="img"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon-test.png"></span>
+                                <span class="name">专题</span>
+                                <span class="intro">浓缩的安全精华汇总</span>
+                            </a>
+                        </li>
+                        <li class="last">
+                            <a href="http://www.freebuf.com/report" target="_blank">
+                                <span class="img"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/1556610533_5cc7fde54fd18.png"></span>
+                                <span class="name">报告</span>
+                                <span class="intro">FB研究院专业出品</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown-menu wenku-menu" id="course-menu" style="">
+                <div class="container">
+                    <ul class="menu">
+                        <li>
+                            <a href="http://live.freebuf.com/" target="_blank">
+                                <span class="img"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon-good-course.png"></span>
+                                <span class="name">精品公开课</span>
+                                <span class="intro">FreeBuf匠心打造精品高端课程</span>
+                            </a>
+                        </li>
+                        <li class="last">
+                            <a href="http://open.freebuf.com/" target="_blank">
+                                <span class="img"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon-common-course.png"></span>
+                                <span class="name">普通公开课</span>
+                                <span class="intro">分享安全领域的知识与智慧</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div></div></div>
+</div>
+<!----------header end---------->
+<script type="text/javascript" src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/header.js.下载"></script><script>
+    jQuery(window).load(function(){
+      if(jQuery(window).width()>480){
+        jQuery(".main-header").sticky({ topSpacing: 0 });
+      }else{
+        jQuery(".main-header nav").removeClass("navbar-fixed-top");
+      }
+      jQuery("#mar-right").sticky({ topSpacing: 105,bottomSpacing: 410 });
+    });
+</script>
+<script src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/layer.js.下载"></script>
+<script type="text/javascript" src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/prettify.js.下载"></script>
+<script type="text/javascript" src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/lazyload.js.下载"></script>
+<script type="text/javascript" charset="utf-8">
+      jQuery(function() {
+          jQuery("img").lazyload({
+              effect : "fadeIn"
+          });
+      });
+ </script>
+<script type="text/javascript">
+    window.onload = function(){
+        prettyPrint();
+    }
+</script>
+<script language="JavaScript" type="text/javascript">
+//<![CDATA[
+var va = "您已经点亮过了";
+function acv_vote(id,option, m){
+  if( m==null) m =''; m = m + '';
+  jQuery('#acv_stat_'+m+id).html('Loading...');
+  var url="https://www.freebuf.com/index.php?acv_ajax=true&option="+option+"&ID="+id;
+  jQuery.get(url,function(d){
+    d =d.split('|');var s='#acv_stat_'+m+d[0];
+    var sele = '#cos_support-'+m+id,unsele = '#cos_unsupport-'+m+id,tpjs = 'javascript:alert(va)';
+    jQuery( s ).html( d[1] );jQuery(s).fadeOut(400,function(){jQuery(s).fadeIn();});
+    if( d[2] == 1 ){ jQuery(sele).html(jQuery(sele).html()*1+1); }
+    if( d[2] == -1 ){ jQuery(unsele).html(jQuery(unsele).html()*1+1); }
+    jQuery('#vote4-'+id).attr('href',tpjs);jQuery('#vote4-2'+id).attr('href',tpjs);
+    jQuery('#votea-'+id).attr('href',tpjs);jQuery('#votea-2'+id).attr('href',tpjs);
+  });
+}
+  
+$(document).on("mouseenter",".comment-tools",function(){
+  $(this).find(".btn-report").show();
+  $(this).find(".btn-report").addClass("hover");
+}).on("mouseleave",".comment-tools",function(){
+  var $_this = $(this);
+  $(this).find(".btn-report").removeClass("hover");
+  if(!$(this).find(".dropup").hasClass('open')){
+    $(this).find(".btn-report").hide(); 
+    $_this.find(".dropdown-menu").css("display","none");
+  }else{
+    setTimeout(function(){
+      if(!$_this.find(".btn-report").hasClass("hover")){
+        $_this.find(".dropup").removeClass("open");
+        $_this.find(".dropdown-menu").css("display","none");
+        $_this.find(".btn-report").hide(); 
+      }
+    },"500");
+  }
+})
+
+$(document).on("click",".click_report",function(){
+  $(this).parent().parent().css("display","none");
+  var id = $(this).attr("data-id");
+  var url="https://www.freebuf.com/index.php?acv_ajax=true&option=0&ID="+id;
+  $_this = $(this);
+  jQuery.get(url,function(d){
+    d =d.split('|');
+    if(d[1]=='您已经点过灯了'){
+      d[1] = '您已经举报过了';
+    }
+    if(d[1]=='Thank you'){
+      d[1] = '举报成功';
+    }
+    $_this.parent().parent().parent().find(".btn-report").text(d[1]);
+    $_this.parent().parent().parent().find(".btn-report").css("display","block");
+  })
+})
+
+$(document).on("click",".btn-report",function(){
+  if($(this).parent().hasClass('open')){
+    $(this).parent().find(".dropdown-menu").css("display","block");
+  }else{
+    $(this).parent().find(".dropdown-menu").css("display","none");
+  }
+})
+//]]>
+</script>
+<div class="column-article" data-column="1">
+            <div class="column-article-banner" style="background-image: url(&#39;https://image.3001.net/images/20181224/1545610606_5c20256e8ea71.png!1920.400&#39;); position: relative;">
+                <div style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; background-color: rgba(0, 0, 0, 0.5)"></div>
+                <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-8 col-md-offset-2">
+                    <div class="article-wrap">
+                        <div class="articlecontent">
+                            <div class="title clearfix">
+                                <h2>
+                                    萌新等级保护完全指南，保证“一看就会、一做就废”（下）                                </h2>
+                                                                <div class="article-meta clearfix">
+                                    <input type="hidden" id="token" value="99345">
+                                    <div class="pull-left">
+                                        <span class="name-head"><img class="" src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/1546848121_5c330779b04dd.png"><a href="https://www.freebuf.com/author/redhatd" title="由 redhatd 发布" rel="author">redhatd</a></span>                                        <span class="time">2019-01-07</span>
+                                        <span class="tags_01"></span>
+                                    </div>
+                                    <div class="pull-right clearfix">
+                                        <span class="starting-column pull-left">首发专栏：<b><a href="http://zhuanlan.freebuf.com/column/index/?name=%E7%81%B0%E5%93%A5%E7%9A%84%E5%B0%8F%E9%85%92%E9%A6%86" target="_blank">灰哥的小酒馆</a></b></span><span class="btn-box pull-left"><button href="http://www.freebuf.com/oauth" class="btn-common1 btn-common3 btn-attention follow" data-login="0">关注</button></span>                                        <div class="share-top-box pull-left">
+                                            <div class="share-top-wrap">
+                                                <div class="share-ctrl share-top">
+                                                    <div class="bdsharebuttonbox clearfix bdshare-button-style1-24" data-bd-bind="1489991449190">
+                                                        <a href="http://service.weibo.com/share/share.php?url=https://www.freebuf.com/articles/security-management/192723.html&amp;title=%E8%90%8C%E6%96%B0%E7%AD%89%E7%BA%A7%E4%BF%9D%E6%8A%A4%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97%EF%BC%8C%E4%BF%9D%E8%AF%81%E2%80%9C%E4%B8%80%E7%9C%8B%E5%B0%B1%E4%BC%9A%E3%80%81%E4%B8%80%E5%81%9A%E5%B0%B1%E5%BA%9F%E2%80%9D%EF%BC%88%E4%B8%8B%EF%BC%89&amp;appkey=1343713053&amp;pic=https://image.3001.net/images/20190107/1546839631_5c32e64f4ad27.jpg!420.280&amp;searchPic=true#_loginLayer_1520574669384" data-toggle="tooltip" data-placement="top" data-cmd="tsina" title="" id="tsina" target="_blank" data-original-title="分享到新浪微博"></a>
+                                                        <a href="javascript:;" data-toggle="tooltip" data-placement="top" data-cmd="weixin" title="" id="weixin" class="weixin_up" data-original-title="分享到微信">
+
+                                                            <!-- 添加微信二维码显示 -->
+                                                            <div class="panel-weixin weixin_qcode" style="display: none;">
+                                                                <section class="weixin-section">
+                                                                    <p>
+                                                                        <img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/qrcode" alt="二维码">
+                                                                    </p>
+                                                                </section>
+                                                                <h3>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</h3>
+                                                            </div>
+
+                                                        </a>
+                                                        <a href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://www.freebuf.com/articles/security-management/192723.html&amp;title=%E8%90%8C%E6%96%B0%E7%AD%89%E7%BA%A7%E4%BF%9D%E6%8A%A4%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97%EF%BC%8C%E4%BF%9D%E8%AF%81%E2%80%9C%E4%B8%80%E7%9C%8B%E5%B0%B1%E4%BC%9A%E3%80%81%E4%B8%80%E5%81%9A%E5%B0%B1%E5%BA%9F%E2%80%9D%EF%BC%88%E4%B8%8B%EF%BC%89&amp;desc=%E5%BF%AB%E5%8F%AB%E4%BD%A0%E7%9A%84%E5%B0%8F%E4%BC%99%E4%BC%B4%E6%9D%A5%E5%88%86%E4%BA%AB%E5%90%A7&amp;summary=&amp;pics=https://image.3001.net/images/20190107/1546839631_5c32e64f4ad27.jpg!420.280" data-toggle="tooltip" data-placement="top" data-cmd="qzone" title="" id="qzone" target="_blank" data-original-title="分享到QQ空间"></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <script>
+                                            $(function () {
+                                                $('.follow').on('click', function () {
+                                                    var token = $('#token').val();
+                                                    var id = $(this).attr('data-val');
+                                                    var status = $(this).attr('data-status');
+                                                    var _url = document.location.href;
+                                                    var login = $(this).attr('data-login');
+                                                    if(login !=1){
+                                                        window.open('http://www.freebuf.com/oauth');
+                                                        return false;
+                                                    }
+                                                    var _this= $('.follow');
+                                                    $.ajax({
+                                                        type: "post",
+                                                        url: _url,
+                                                        data: {'token':token,'id':id, 'status':status, 'follow':1},
+                                                        success: function (data) {
+                                                            $('#token').val(data.token);
+                                                            if(data.status ==1){
+                                                                _this.attr('data-status', 0);
+                                                                _this.text('已关注');
+                                                                _this.addClass('btn-common4');
+                                                                _this.removeClass('btn-common3');
+                                                            }else {
+                                                                _this.attr('data-status', 1);
+                                                                _this.text('关注');
+                                                                _this.addClass('btn-common3');
+                                                                _this.removeClass('btn-common4');
+                                                            }
+                                                            layer.open({
+                                                                title: '系统提示',
+                                                                btnAlign: 'c',
+                                                                content: data.msg,
+                                                                area: '278px',
+                                                            });
+                                                        },
+                                                    })
+                                                })
+                                            })
+                                        </script>
+                                        <script>
+                                            $(function(){
+                                                $('[data-toggle="tooltip"]').tooltip();
+                                            })
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="container pad-top35">
+        <div class="row clearfix">
+            <div class="col-sm-12 col-md-8 col-md-offset-2" id="getWidth">
+                    <div class="reletive search-xs-wrap">
+                    <div class="form-group has-active search-col search-xs">
+                        <form id="hpsform-new" class="navbar-search navbar-form" onsubmit="return dispatch()">
+                            <div class="form-group">
+                                <input id="q" class="input form-control" type="text" placeholder="关键字查找" autocomplete="off" title="关键字查找" name="q">
+                                <button class="submit" type="submit"></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                    <script type="text/javascript">
+                        var dispatch = function () {
+                            var q = document.getElementById("q");
+                            if (q.value == "") {
+                                q = document.getElementById("bigq");
+                            }
+                            if (q.value != "") {
+                                window.open('http://search.freebuf.com/search/?search=' + q.value, "_blank");
+                                return false;
+                            } else {
+                                return false;
+                            }
+                        }
+                    </script>
+                <div class="article-wrap panel panel-default">
+                                                            <div class="articlecontent">
+                                                                                                    <div class="content-intro">
+                                <i class="dot-top"></i>
+                                <i class="dot-bottom"></i>
+                                <span>【一看就会】 是因为很多我尽可能写得很详细。 【一做就废】如果基础知识不牢固很多部分会懵逼。 本文章作者的等级保护项目相关坑点以及经验分享。本文知识点过于庞杂，有需要可以收录到自己的网页收藏夹。 萌新适用 文章着重等级保护2到3级主要过程和技术部分为重点讲解。</span>
+                            </div>
+                                                <div id="contenttxt">
+                            <p> 【一看就会】 是因为很多我尽可能写得很详细。 【一做就废】如果基础知识不牢固很多部分会懵逼。 本文章作者的等级保护项目相关坑点以及经验分享。本文知识点过于庞杂，有需要可以收录到自己的网页收藏夹。 萌新适用 文章着重等级保护2到3级主要过程和技术部分为重点讲解。&nbsp;</p>
+<h2>    <strong>0×1&nbsp;</strong>continue</h2>
+<blockquote><p><strong>萌新等级保护完全指南，保证“一看就会、一做就废”（上）</strong></p>
+<p> <a href="https://www.freebuf.com/articles/security-management/191491.html">https://www.freebuf.com/articles/security-management/191491.html</a></p>
+</blockquote>
+<p> 上次说到 物理安全和网络安全部分 继续说后面的主机安全 应用安全 数据安全以及备份恢复</p>
+<h2>    <strong>0×2 主机安全 技术要求</strong></h2>
+<p> PS: 主机安全 &nbsp; 一般我们常说的基线，此部分内容较多，整改重点。 &nbsp; 由于操作系统种类，版本繁多，网上较多的类似加固或者基线文档多少有些错误的地方，哪怕是WINDOWS 版本不同配置位置也有少许变化。不可盲目相信网上的基线，加固文档，需要自行测试。</p>
+<p> 基线、加固、配置规范常说都是一类东西，只是看什么系统什么设备的相关基线或者加固，配置规范等。 相关系统、网络设备等基线建设是一个长期而且繁琐的事情，这方面不要给自己挖坑了。</p>
+<p> <a href="https://image.3001.net/images/20181224/1545611405_5c20288db0ee1.png" class="highslide-image" onclick="return hs.expand(this);" target="_blank"><img data-original="https://image.3001.net/images/20181224/1545611405_5c20288db0ee1.png!small" src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/1545611405_5c20288db0ee1.png!small" style="display: block;"></a></p>
+<noscript><img src="https://image.3001.net/images/20181224/1545611405_5c20288db0ee1.png!small"></p></noscript>
+<p> <strong>身份鉴别</strong>&nbsp;</p>
+<table>
+<colgroup>
+<col>
+<col>
+<col>    </colgroup>
+<thead>
+<tr>
+<th> <strong>基本要求</strong> </th>
+<th> <strong>解读</strong> </th>
+<th> <strong>备注</strong> </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> a)应对登录操作系统和数据库系统的用户进行身份标识和鉴别； </td>
+<td> 主机登陆和数据库登陆要有独立账户密码以及密码验证 </td>
+<td> 一般为部分符合，多数情况为数据库用户管理员账户可以直接登陆，建议对数据库进行验证设置。 </td>
+</tr>
+<tr>
+<td> b)操作系统和数据库系统管理用户身份标识应具有不易被冒用的特点，口令应有复杂度要求并定期更换； </td>
+<td> windows 本地安全设置-账户策略-密码策略&nbsp;                <br>设置密码历史记录、设置密码最长使用期限、设置密码最短使用期限、设置最短密码长度、设置密码复杂度要求。&nbsp;                <br>centos 6.0-6.9&nbsp;                <br>/etc/pam.d/system-auth&nbsp;&nbsp;                <br>password &nbsp;requisite pam_cracklib.so difok=3 minlen=8 ucredit=-1 lcredit=-1 dcredit=1&nbsp;&nbsp;                <br>/etc/login.defs&nbsp;                <br>PASS MAX DAYS_ _90 #登录密码有效期90天PASS_MIN_DAYS 0 #登录密码最短修改时间，增加可以防止非法用户短期更改多次PASS_MIN_LEN 8 #登录密码最小长度8位PASS_WARN_AGE 7 #登录密码过期提前7天提示修改FAIL_DELAY 10 #登录错误时等待时间10秒FAILLOG ENAB yes FAILLOG_ENAB yes #登录错误记录到日志&nbsp;                <br>SYSLOG_SU_ENAB yes #当限定超级用户管理日志时使用&nbsp;                <br>SYSLOG___ y SG_ENAB yes&nbsp;                <br>&nbsp;#当限定超级用户 当限定超级用户 管 日 时使用 组管理日志时使用&nbsp;                <br>MD5_CRYPT_ENAB yes&nbsp;                <br>&nbsp;#当使用md5为密码的加密方法时使用 </td>
+<td> 系统的密码策略不等于你自行配置的密码复杂度要求，看有没有配置即可，并不是看系统本身密码是否达到复杂度。&nbsp;                <br>其实简单说：&nbsp;                <br>1、没有密码复杂度策略你可以配置弱密码 &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;                <br>2、如果有密码复杂度策略，是配置不上去的。会提示你密码复杂度不符合。 </td>
+</tr>
+<tr>
+<td> c)应启用登录失败处理功能，可采取结束会话、限制非法登录次数和自动退出等措施； </td>
+<td> windows 本地安全设置-账户策略-账户锁定策略- 账户锁定阈值 5次 &nbsp;锁定时间30分钟&nbsp;                <br><strong>centos 5.9以下</strong>&nbsp;                <br>/etc/pam.d/ system-auth&nbsp;添加auth required&nbsp;<strong>pam_tally.so</strong>&nbsp;onerr=fail deny=5&nbsp;unlock_time=300&nbsp;                <br><strong>centos 6.0-6.9</strong>添加位置：/etc/pam.d/system_auth或/etc/pam.d/password_auth文件添加项：auth required&nbsp;<strong>pam_tally2.so</strong>&nbsp;onerr=fail deny=5 unlock_time=300&nbsp;和&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; account required&nbsp;<strong>pam_tally2.so</strong>注意：第一行必须加到auth                required pam_env.so这行后面，如果加到别处位置，可能不起作用。第二行可以加到所有account配置之后。 </td>
+<td> 一般情况不符合，可整改。&nbsp;                <br>&nbsp;linux 有两个锁定账户的 简单说配置文件的&nbsp;                <br><strong>pam_tally.so与pam_tally2.so 解读粗体部分已标注</strong>pam_tally.so是老的版本，从RedHat Linux 6（centos 6)开始，pam_tally2.so是唯一可用的程序。所以只要系统存在pam_tally2.so，建议就不要用pam_tally.so了。这两者之间的差别：pam_tally的“reset”、“no_magic_root”和“no_reset”选项在pam_tally2里没有了。&nbsp;                <br>是否符合要求看锁定配置即可。 </td>
+</tr>
+<tr>
+<td> d)当对服务器进行远程管理时，应采取必要措施，防止鉴别信息在网络传输过程中被窃听； </td>
+<td> 看wireshark是否在登陆线路上监听能 嗅探到密码。也可以使用三方管理软件登陆 如pcanywhere 向日葵等。&nbsp; </td>
+<td> &nbsp;一般符合来说ssh win系统2008 远程桌面都是加密的。&nbsp; </td>
+</tr>
+<tr>
+<td> e)应为操作系统和数据库系统的不同用户分配不同的用户名，确保用户名具有唯一性。 </td>
+<td> 账户权限分离，网络安全也有一条类似的要求。就是操作系统管理员账户与数据库管理员账户分开。最好不同的人管理。 </td>
+<td> 一般情况不符合，多数没有区分账户角色。 </td>
+</tr>
+<tr>
+<td> <strong>f)应采用两种或两种以上组合的鉴别技术对管理用户进行身份鉴别。</strong> </td>
+<td> <strong>双因子认证，网络安全也提过，此条针对登陆操作系统，除了账户密码之外，有加密狗或短信或生物指纹验证使用者身份。</strong> </td>
+<td> <strong>三级要求 一般不符合，实现方法可以使用堡垒机+加密狗方式。 看客户资金是否充裕购买吧。如果堡垒机支持登陆网络设备，网络安全上的双因子登陆要求也算满足。</strong> </td>
+</tr>
+</tbody>
+</table>
+<p> <strong>访问控制</strong>&nbsp;</p>
+<table>
+<colgroup>
+<col>
+<col>
+<col>    </colgroup>
+<thead>
+<tr>
+<th> <strong>基本要求</strong> </th>
+<th> 解读 </th>
+<th> 备注 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> a)应启用访问控制功能，依据安全策略控制用户对资源的访问； </td>
+<td> 一般看下&nbsp;%systemroot% &nbsp;C: D: 等主要驱动上的NTFS 权限标注即可 在磁盘或文件夹鼠标右键属性-安全。&nbsp;                <br>linux 在etc目录 和一些usr目录使用 ls -l 命令即可看到权限，rwx 之类的权限标注这里不解释了&nbsp; </td>
+<td> window默认情况 &nbsp;user不是拥有全部权限 administrators 组拥有最高，不能存在everyone 有权限的情况，如果磁盘不是ntfs 不能进行权限管理直接为不符合。&nbsp;                <br>linux 不能出现 777的权限配置文件以及目录即：&nbsp;                <br>rwxrwxrwx&nbsp; </td>
+</tr>
+<tr>
+<td> b)应根据管理用户的角色分配权限，实现管理用户的权限分离，<strong>仅授予管理用户所需的最小权限；</strong> </td>
+<td> 账户权限分离，一般需要有普通用户，审计账户，日志账户。并为不同的账户分配最小权限。&nbsp;                <br>windows&nbsp;本地安全设置-本地策略-用户权利指派&nbsp; </td>
+<td> <strong>粗体部分为三级要求，一般情况为不符合，因为一般客户系统只有一个超级管理员用户。</strong> </td>
+</tr>
+<tr>
+<td> <strong>c)应实现操作系统和数据库系统特权用户的权限分离；</strong> </td>
+<td> <strong>操作系统账户与数据库管理员账号分开，账户独立密码独立。不能操作系统管理员不加任何验证直接登陆数据库账户的情况</strong> </td>
+<td> <strong>&nbsp;三级要求 一般情况不符合，没有分配独立两个账户，多数情况是操作系统管理员可以直接登陆数据库。</strong> </td>
+</tr>
+<tr>
+<td> d)应严格限制默认帐户的访问权限，重命名系统默认帐户，修改这些帐户的默认口令； </td>
+<td> 重命名administrator &nbsp;root &nbsp; guest &nbsp;等账户名 操作系统默认口令倒是不存在，网络设备可能存在默认口令需要修改更正。 </td>
+<td> &nbsp;一般情况不符合，没有重命名，不过有些系统考虑到可能存在用户名与业务系统绑定情况，建议先找个业务闲时测试更改，无问题就不需要改回来了，有问题在恢复原来的用户名。 根据实际情况选择。 </td>
+</tr>
+<tr>
+<td> e)应及时删除多余的、过期的帐户，避免共享帐户的存在。 </td>
+<td> 对于已经建立的账户，管理人员应明白具体用途，不能存在不知道作用的账户，不能与多人共享某个账户 </td>
+<td> 一般情况部分符合，有些操作系统就一个用户这类问题就不存在。其他如一些IIS 用户或者数据单独建立的账户，客户系统管理人员技术参差不齐，有些可能知道用户具体作用，有些不知道。 </td>
+</tr>
+<tr>
+<td> <strong>f）应对重要信息资源设置敏感标记。</strong> </td>
+<td> <strong>文件是否有重要程度区分，如是否标注重要，一般有项目或文件档案是否有编号明显标记等，如存储身份证号 电话号码 学号 工号等。数据库对这些数据应加密存储。关键文件是否加密保存。</strong> </td>
+<td> <strong>三级要求 其实条目并不实用 一般部分符合。如果不存在敏感信息也可以评定为不适用。</strong> </td>
+</tr>
+<tr>
+<td> <strong>g）应依据安全策略严格控制用户对有敏感标记重要信息资源的操作。</strong> </td>
+<td> <strong>解释同上 不同之处是否对于关键的文件有权限划分，如何划分的，如何设定访问权限等。</strong> </td>
+<td> <strong>三级要求 类似访问控制的第一条 本条强调如何划分和实现以及区别。这些敏感标记的资源，权限，访问方式等。一般为不符合</strong> </td>
+</tr>
+</tbody>
+</table>
+<p> <strong>安全审计 （如有堡垒机三方运维审计应酌情考虑加分）</strong>&nbsp;</p>
+<table>
+<colgroup>
+<col>
+<col>
+<col>    </colgroup>
+<thead>
+<tr>
+<th> <strong>基本要求</strong> </th>
+<th> 解读 </th>
+<th> <strong>备注</strong> </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> a)审计范围应覆盖到服务器和重要客户端上的每个操作系统用户和数据库用户； </td>
+<td> 操作系统需要开启本身系统账户审计功能以及数据库账户审计日志功能。&nbsp;                <br>windows （事件查看器看看有无最近日志）&nbsp;                <br>linux&nbsp;                <br>/var/run/utmp &nbsp;&nbsp;                <br>当前正在登录系统的用户信息&nbsp;                <br>/var/log/wtmp&nbsp;                <br>当前正在登录和历史登录系统的用户信息&nbsp;                <br>/var/log/btmp&nbsp;                <br>失败的登录尝试信息&nbsp; </td>
+<td> 一般情况为部分符合，系统的基础日志功能都有。&nbsp;                <br>只是开启的但不详细。可以结合下条要求&nbsp; </td>
+</tr>
+<tr>
+<td> b)审计内容应包括重要用户行为、系统资源的异常使用和重要系统命令的使用等系统内重要的安全相关事件； </td>
+<td> windows （事件查看器看看有无最近日志）&nbsp;                <br>在安全设置 （本地安全策略）中，展开本地策略，显示审核策略（所有策略开启成功失败）以及安全选项策略。&nbsp;                <br>linux&nbsp;                <br>1、查看服务状态：&nbsp;                <br>#service syslog status&nbsp;                <br>#service audit status&nbsp;或#service –status-all | &nbsp;grep running&nbsp;                <br>2、查看是否启用如下配置：&nbsp;                <br># grep “@priv-ops” /etc/audit/filter.conf&nbsp;                <br># grep “@mount-ops” /etc/audit/filter.conf&nbsp;                <br># grep “@system-ops” /etc/audit/filter.conf &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; </td>
+<td> 一般情况为不符合。但可以都可以整改。&nbsp;                <br>如果有堡垒机可以当做运维审计的第三方的审计工具，认定符合。前提要求是堡垒机不能存在绕过的情况，任何运维人员强制登陆堡垒机后登陆操作系统。&nbsp;                <br>一般windows 默认情况没有用户日志，为不符合，开启则为符合可以手动开启关键需要开启审核策略（所有条目开启成功失败都记录）&nbsp;                <br>一般linux&nbsp;&nbsp;audit是一个系统软件包，如果没有安装。需要安装后才能执行开启命令，就是说安装之前需要选择软件包，有些版本也存在默认选择，根据系统实际情况判断，没有开启日志为不符合，开启则为符合。&nbsp;                <br><strong>centos 6.5 64 为例软件包的名称为<br>audit-libs.x86_64<br>audit.x86_64</strong>&nbsp; </td>
+</tr>
+<tr>
+<td> c)审计记录应包括事件的日期、时间、类型、主体标识、客体标识和结果等； </td>
+<td> 结合前面两条，&nbsp;                <br>windows&nbsp;                <br>事件查看器 （应用程序 系统 安全性）&nbsp;                <br>linux &nbsp;&nbsp;                <br>cat vi 都可&nbsp;                <br>/var/log/audit.d&nbsp; </td>
+<td> 结合前面两条，系统本身记录类型完备，就看详细配置有没有做，一般情况部分符合，或不符合。可整改为符合。 </td>
+</tr>
+<tr>
+<td> <strong>d)应能够根据记录数据进行分析，并生成审计报表；</strong> </td>
+<td> <strong>正常的操作系统都有此功能。<br>windows 可以在事件查看器中导出日志<br>linux 可以文本手动导出</strong> </td>
+<td> <strong>三级要求，正确配置上述三条的，为部分符合，主要没有具体分析功能。 还要看导出的结果内容是否完善。堡垒机能导出审计报表为符合。</strong> </td>
+</tr>
+<tr>
+<td> <strong>e)应保护审计进程，避免受到未预期的中断；</strong> </td>
+<td> <strong>保护审计进程，当避免当事件发生时，能够及时记录事件发生的详细内容。<br>windows 系统具备在审计进程自我保护方面功能<br>linux auditd 是 Linux中的审计守护进程，syslogd是Linux中的日志守护进程，因此可以通过services命令查看其状态</strong><strong>&nbsp;</strong><strong>#service –status-all |gerp auditd</strong><strong>#service –status-all |gerp syslogd</strong>                </td>
+<td> <strong>三级要求，一般情况为符合，操作系统自带的安全机制。需要判断日志进程是否正常运行,日志是否正常记录。</strong> </td>
+</tr>
+<tr>
+<td> <strong>f)应保护审计记录，避免受到未预期的删除、修改或覆盖等。</strong> </td>
+<td> <strong>通常情况是管理员可以删除，修改，覆盖日志，其他用户不可。日志时间不少于6个月&nbsp;</strong> </td>
+<td> <strong>三级要求 一般为部分符合，除超级管理员和日志审计账户外 其他账户不能操作日志相关服务、进程、文件等。有额外专门日志服务器为符合。跟之前网络安全日志要求类似。但本条属于操作系统层面</strong> </td>
+</tr>
+</tbody>
+</table>
+<p> <strong>剩余信息保护</strong></p>
+<table>
+<colgroup>
+<col>
+<col>
+<col>    </colgroup>
+<thead>
+<tr>
+<th> <strong>基本要求</strong> </th>
+<th> <strong>解读</strong> </th>
+<th> <strong>备注</strong> </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> <strong>a)应保证操作系统和数据库系统用户的鉴别信息所在的存储空间，被释放或再分配给其他用户前得到完全清除，无论这些信息是存放在硬盘上还是在内存中；</strong> </td>
+<td> <strong>指操作系统用户的鉴别信息存储空间，被释放或再分配给其他用户前是否得到完全清除。</strong>&nbsp;                <br><strong>打开</strong>本地安全策略<strong>-</strong>本地策略中的安全选项<strong>查看是否启用</strong>不显示上次登录用户名&nbsp;                <br><strong>linux 不适用或不符合 虽然有其他方式实现擦除 标准没有得到统一</strong> </td>
+<td> <strong>三级要求 一般不符合，可整改，严格意义上说服务器操作系统每个账号记录拥有独立空间和独立日志。但如QQ登陆窗口会显示之前QQ登陆账号这显然就不符合。</strong>&nbsp;                <br><strong>严格意义上剩余信息保护，是需要</strong>清理所有缓存<strong>的，再说</strong>清理缓存<strong>并不是</strong>完全擦除<strong>，还是可以</strong>数据恢复<strong>，但本文不做过多讨论了。</strong> </td>
+</tr>
+<tr>
+<td> <strong>b)应确保系统内的文件、目录和数据库记录等资源所在的存储空间，被释放或重新分配给其他用户前得到完全清除。</strong> </td>
+<td> <strong>解释同上 针对对象变为、文件、目录、数据库记录所在的存储空间<br>WINDOWS<br>打开&nbsp;</strong>本地安全策略<strong>-</strong>本地策略中的安全选项<strong>查看是否选中&nbsp;</strong>关机前清除虚拟内存页面&nbsp;                <br><strong>打开&nbsp;</strong>本地安全策略<strong>-</strong>帐户策略中的密码策略<strong>查看是否选中&nbsp;</strong>用可还原的加密来存储密码&nbsp;                <br><strong>linux &nbsp;不适用或不符合 虽然有其他方式实现完全清除， 标准没有得到统一</strong>&nbsp; </td>
+<td> <strong>三级要求，windows一般情况为不符合，可整改。</strong> </td>
+</tr>
+</tbody>
+</table>
+<p> <strong>入侵防范</strong></p>
+<table>
+<colgroup>
+<col>
+<col>
+<col>    </colgroup>
+<thead>
+<tr>
+<th> <strong>基本要求</strong> </th>
+<th> 解读 </th>
+<th> 备注 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> <strong>a)应能够检测到对重要服务器进行入侵的行为，能够记录入侵的源IP、攻击的类型、攻击的目的、攻击的时间，并在发生严重入侵事件时提供报警；</strong> </td>
+<td> <strong>维护系统安全，必须进行主动监视，以检查是否发生了入侵和攻击。因此一套成熟的主机监控机制能够有效的避免、发现、阻断恶意攻击事件&nbsp;<br>如360 安全狗 D盾这类主动防御的东西。<br>linux iptables &nbsp;配置并启用 需要有规则（iptables 规则根据实际业务情况而定 不赘述）<br>一些系统自带软件手动配置方式<br>过滤不需要使用的端口，过滤不需要的应用层网络服务，过滤ICMP数据包。（系统自带防火墙 、</strong><strong>linux iptables &nbsp;TCP/IP筛选器等</strong><strong>）</strong>                </td>
+<td> <strong>三级要求 一般情况为部分符合，有些因为操作系统业务性能问题，没有装一些防护软件怕耗费资源。但是网络安全上有IPS,IDS可酌情考虑为部分符合或符合。系统自带防火墙也可开启算为部分符合，防火墙没有告警功能仅日志功能。</strong> </td>
+</tr>
+<tr>
+<td> <strong>b)应能够对重要程序的完整性进行检测，并在检测到完整性受到破坏后具有恢复的措施；</strong> </td>
+<td> <strong>完整性检测与备份恢复，基于操作系统文件和操作系统配置本身。</strong> </td>
+<td> <strong>三级要求完整性检测一般难做到，操作系统自身配置可有备份，一般判断部分符合。<br>完整性检查最常用的是md5 判断系统上文件，还得梳理一个MD5值文件表相对麻烦。</strong> </td>
+</tr>
+<tr>
+<td> c)操作系统应遵循最小安装的原则，仅安装需要的组件和应用程序，并通过设置升级服务器等方式保持系统补丁及时得到更新。 </td>
+<td> 系统服务最小化，端口最小化，操作系统以及中间件及时更新补丁。 </td>
+<td> 一般情况，部分符合，可能存在不好打补丁的和升级中间件的情况，IPS可以防御，可酌情考虑。 </td>
+</tr>
+</tbody>
+</table>
+<p> <strong>恶意代码防范</strong>&nbsp;</p>
+<table>
+<colgroup>
+<col>
+<col>
+<col>    </colgroup>
+<thead>
+<tr>
+<th> <strong>基本要求</strong> </th>
+<th> <strong>解读</strong> </th>
+<th> <strong>备注</strong> </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> a)应安装防恶意代码软件，并及时更新防恶意代码软件版本和恶意代码库； </td>
+<td> 主机服务器上需要有杀毒软件，要可以升级病毒库的杀毒软件。 </td>
+<td> 一般情况符合，这里需要跟入侵防范的加以区分，主动防御是主动防御 &nbsp;杀毒软件是杀毒软件，确实有也QQ管家 360这类 有主动防御和杀毒功能一体的。没有杀毒软件不符合。 </td>
+</tr>
+<tr>
+<td> <strong>b)主机防恶意代码产品应具有与网络防恶意代码产品不同的恶意代码库；</strong> </td>
+<td> <strong>主机上的杀毒软件与网络层上的WAF或防毒墙病毒库或厂家应该不同</strong> </td>
+<td> <strong>三级要求 一般情况部分符合，安全设备，以及本机杀毒软件配备情况下符合</strong> </td>
+</tr>
+<tr>
+<td> c)应支持防恶意代码的统一管理。 </td>
+<td> 可以统一进行部署，更新和管理。 </td>
+<td> 一般情况不符合，一般指网络版杀毒软件需要额外购买与授权，简单说经费问题。 </td>
+</tr>
+</tbody>
+</table>
+<p> <strong>资源控制</strong>&nbsp;</p>
+<table>
+<colgroup>
+<col>
+<col>
+<col>    </colgroup>
+<thead>
+<tr>
+<th> <strong>基本要求</strong> </th>
+<th> 解读 </th>
+<th> <strong>备注</strong> </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> a)应通过设定终端接入方式、网络地址范围等条件限制终端登录； </td>
+<td> 主机上的防火防准入配置，准许哪些IP访问，禁止哪些IP访问。 </td>
+<td> 一般部分符合，大多情况策略太宽松了。开启防火墙没有策略算不符合 </td>
+</tr>
+<tr>
+<td> b)应根据安全策略设置登录终端的操作超时锁定； </td>
+<td> WINDOWS 设置屏幕保护 屏幕保护后需要密码恢复。&nbsp;                <br>linux 设置终端超时时间即可。 </td>
+<td> 一般情况不符合，大多运维觉得麻烦。但都可以设置。觉得麻烦可以设置时间适当长点。 10-20分钟等。设置完毕应为符合。 </td>
+</tr>
+<tr>
+<td> <strong>c)应对重要服务器进行监视，包括监视服务器的CPU、硬盘、内存、网络等资源的使用情况；</strong> </td>
+<td> <strong>主机级的监控探针，能监控服务器状态。一般会需要安装一个客户端监控软件。</strong> </td>
+<td> <strong>三级要求 一般不符合，大多是没有安装，推荐一个简单的开源监控ZABBIX 安装方式不赘述 &nbsp;windows linux 都可用。</strong> </td>
+</tr>
+<tr>
+<td> d)应限制单个用户对系统资源的最大或最小使用限度； </td>
+<td> 字面意思，用户使用资源需要进行最大，最小的使用额度限制。&nbsp;                <br>WINDOWS &nbsp;了解一下是否配置磁盘配额 &nbsp;远程桌面用户数量同时在线数量是否有限制。&nbsp;                <br>linux&nbsp;                <br>查看/etc/security/limits.conf中参数nproc可以设置最大进程数。&nbsp;                <br>类似如下配置：&nbsp;                <br>* soft core 0&nbsp;&nbsp;                <br>* hard rss 5000 （所有用户：内存5M）&nbsp;                <br>@user hard nproc 20(user: 进程20）&nbsp;                <br>#more /etc/security/limits.conf，是否设置了用户进程优先级，priority参数。&nbsp;                <br>#more /etc/security/limits.conf 查看类似如下设置：&nbsp;                <br>@user – maxlogins 1 (最大登陆数）&nbsp; </td>
+<td> &nbsp;一般不符合，没有配置，根据实际需要参考配置即可。 </td>
+</tr>
+<tr>
+<td> <strong>e)应能够对系统的服务水平降低到预先规定的最小值进行检测和报警。</strong> </td>
+<td> <strong>还是主机级的监控软件，能不能到一定程度报警的报警，比如达到CPU 到90% 报警之类的。</strong> </td>
+<td> <strong>三级要求 上面的ZABBIX 软件是可以做到的，告警是发邮件的形式。也有其他软件的实现方式，但都应该没有开源软件便宜，高端点的现在流行的态势感知系统。</strong> </td>
+</tr>
+</tbody>
+</table>
+<h2>    <strong>0×3 应用安全 技术要求</strong>&nbsp;</h2>
+<p> PS： 应用一般是C/S 或B/S 模式，一般所说的应用指WEB页面或有客户端程序的日常跟业务有关的软件或系统。</p>
+<p> 这部分负责等级保护整改工作协作部门无法整改，一般情况是联系应用的开发厂家，配合整改。如业务年代久远没有维保的情况，应用方面整改只能放弃，加强网络和主机方面的整改。</p>
+<p> 还有的多数情况，应用使用人只知道如何使用，对应用相关细节不了解，最好相关询问需要找到开发厂家。有使用操作说明也能省不少事。</p>
+<p> <strong>身份鉴别</strong></p>
+<table>
+<colgroup>
+<col>
+<col>
+<col>    </colgroup>
+<thead>
+<tr>
+<th> <strong>基本要求</strong> </th>
+<th> 解读 </th>
+<th> 备注 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> a)&nbsp;应提供专用的登录控制模块对登录用户进行身份标识和鉴别； </td>
+<td> 应用登陆需要输入用户名和密码，来鉴别登陆人员身份。 </td>
+<td> 一般情况符合，登陆网页或客户端也好，需要输入用户名和密码才可登陆。即为符合。&nbsp; </td>
+</tr>
+<tr>
+<td> b)&nbsp;应提供用户身份标识唯一和鉴别信息复杂度检查功能，保证应用系统中不存在重复用户身份标识，身份鉴别信息不易被冒用； </td>
+<td> 账号唯一性，不应存在账户相同，不同身份的情况。 </td>
+<td> 一般情况符合，能不能建立同名账户测试下即可。 </td>
+</tr>
+<tr>
+<td> c)&nbsp;应提供登录失败处理功能，可采取结束会话、限制非法登录次数和自动退出等措施； </td>
+<td> 连续登陆密码或用户名错误，次数超过5次 应锁定IP或锁定账号 限制登陆，防止暴力破解。 </td>
+<td> 一般情况部分符合，主要是锁定措施不一定有，有些是会有验证码，有些则无也不锁定账户和IP。没有任何限制措施的为不符合。 </td>
+</tr>
+<tr>
+<td> d)&nbsp;应启用身份鉴别、用户身份标识唯一性检查、用户身份鉴别信息复杂度检查以及登录失败处理功能，并根据安全策略配置相关参数。 </td>
+<td> 结合上面条目，账户密码复杂度的强制要求，<strong>还有双子认证部分要求。</strong> </td>
+<td> 一般情况部分符合，<strong>双因子要求为三级要求。双因子认证前面提过两次了，不赘述了。 特别说一下输入两次密码不算双因子认证。</strong> </td>
+</tr>
+</tbody>
+</table>
+<p> <strong>访问控制</strong></p>
+<table>
+<colgroup>
+<col>
+<col>
+<col>    </colgroup>
+<thead>
+<tr>
+<th> <strong>基本要求</strong> </th>
+<th> <strong>解读</strong> </th>
+<th> 备注 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> a)&nbsp;应提供访问控制功能，依据安全策略控制用户对文件、数据库表等客体的访问； </td>
+<td> &nbsp;不同账户应不同权限，只能读、写、编辑的内容应该是限定的内容或自己写的内容，不能出现更改其他账户的情况。 </td>
+<td> 一般情况符合，管理员除外。大多软件开发都会注意这点。 </td>
+</tr>
+<tr>
+<td> b)&nbsp;访问控制的覆盖范围应包括与资源访问相关的主体、客体及它们之间的操作； </td>
+<td> 不同账户访问的资源不同，有效控制访问资源的范围，不能越权操作。 </td>
+<td> 一般情况符合，跟上条类似，此条主要说是本账户与其他资源交互时候的权限要求。 比如别人的东西你无法修改，仅查看功能。 </td>
+</tr>
+<tr>
+<td> c)&nbsp;应由授权主体配置访问控制策略，并严格限制默认帐户的访问权限； </td>
+<td> 所有账户可以进行定义权限的功能。比如可以访问什么不可访问什么，只有读取权限等。可以精细设置 </td>
+<td> 一般情况部分符合，有些应用是可以自行定义和勾选，有些则是通过用户组的方式，用户组来定义权限。没有此功能则为不符合。 </td>
+</tr>
+<tr>
+<td> d)&nbsp;应授予不同帐户为完成各自承担任务所需的最小权限，并在它们之间形成相互制约的关系。 </td>
+<td> 一般所说的最小化权限原则，用户需要什么权限，只给什么权限。制约关系一般所说的是三权分立 即：”管理、审计和操作权限”分别隶属三个账户。 </td>
+<td> 一般情况不符合。多数应用就一个管理员，没有考虑到等级保护要求，开发前考虑过三权分立，基本可以符合。 </td>
+</tr>
+<tr>
+<td> <strong>e)应具有对重要信息资源设置敏感标记的功能；</strong> </td>
+<td> <strong>如是否标注重要，是否有编号明显标记等，如存储身份证号 电话号码 学号 工号等。数据库对这些数据应加密存储。关键文件是否加密保存。&nbsp;</strong> </td>
+<td> <strong>&nbsp;三级要求，之前在主机也有此项不赘述，并不是所有应用适用，此部分为应用层面 一般为不符合</strong> </td>
+</tr>
+<tr>
+<td> <strong>f)应依据安全策略严格控制用户对有敏感标记重要信息资源的操作。</strong> </td>
+<td> <strong>解释同上 不同之处是否对于关键的文件有权限划分，如何划分的，如何设定访问权限等。</strong> </td>
+<td> <strong>三级要求 本条强调如何划分和实现以及区别。这些敏感标记的资源，权限，访问方式等。一般为不符合，不是所有应用都适用</strong>&nbsp; </td>
+</tr>
+</tbody>
+</table>
+<p> <strong>安全审计</strong></p>
+<table>
+<colgroup>
+<col>
+<col>
+<col>    </colgroup>
+<thead>
+<tr>
+<th> <strong>基本要求</strong> </th>
+<th> <strong>现状描述</strong> </th>
+<th> <strong>符合情况</strong> </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> a)&nbsp;应提供覆盖到每个用户的安全审计功能，对应用系统重要安全事件进行审计； </td>
+<td> 具有日志审计功能，覆盖范围应该有，登陆，登出，具体操作，访问过什么页面等。 </td>
+<td> 一般情况部分符合，多数是日志功能不完善，只有用户登陆登出时间记录，没有具体操作和访问什么模块的时间。功能完善应为符合。 </td>
+</tr>
+<tr>
+<td> b)&nbsp;应保证无法单独中断审计进程，无法删除、修改或覆盖审计记录； </td>
+<td> 任意普通用户不能中断日志进程，无法删除、修改或覆盖审计记录。严格的要求是管理员也不可。只能有日志审计账户有权限。 </td>
+<td> 一般情况部分符合，多数情况普通用户看不到日志，也更改不到日志，上面说的三权分立，这部分没做到的话，管理员是可以修改日志的。 </td>
+</tr>
+<tr>
+<td> c)&nbsp;审计记录的内容至少应包括事件的日期、时间、发起者信息、类型、描述和结果等； </td>
+<td> 审计日志的类型应该有，日期，事件，发起者（操作用户）、类型、描述和结果等。 </td>
+<td> 一般情况部分符合，多数情况只记录操作成功的日志，失败的日志没有记录，比如操作某页面权限不足的错误记录，登陆失败的记录等。 </td>
+</tr>
+<tr>
+<td> <strong>d)应提供对审计记录数据进行统计、查询、分析及生成审计报表的功能。</strong> </td>
+<td> <strong>审计的日志可以进行统计，查阅、分析和导出功能</strong> </td>
+<td> <strong>三级要求 可以导出审计日志，一般情况不符合，多数是应用没考虑到这个功能。</strong> </td>
+</tr>
+</tbody>
+</table>
+<p> <strong>剩余信息保护</strong></p>
+<table>
+<colgroup>
+<col>
+<col>
+<col>    </colgroup>
+<thead>
+<tr>
+<th> <strong>基本要求</strong> </th>
+<th> <strong>解读</strong> </th>
+<th> <strong>备注</strong> </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> <strong>a)应保证操作系统和数据库系统用户的鉴别信息所在的存储空间，被释放或再分配给其他用户前得到完全清除，无论这些信息是存放在硬盘上还是在内存中；</strong> </td>
+<td> <strong>指应用用户的鉴别信息存储空间，被释放或再分配给其他用户前是否得到完全清除。至少应保证删除的文件，资源等不可再被其他人读取。</strong> </td>
+<td> <strong>三级要求 &nbsp;跟主机层面剩余信息保护要求类似。 一般为不符合。</strong>&nbsp;                <br><strong>严格意义上剩余信息保护，是需要</strong>清理所有缓存<strong>的，再说</strong>清理缓存<strong>并不是</strong>完全擦除<strong>，还是可以</strong>数据恢复<strong>，但本文不做过多讨论了。</strong> </td>
+</tr>
+<tr>
+<td> <strong>b)应确保系统内的文件、目录和数据库记录等资源所在的存储空间，被释放或重新分配给其他用户前得到完全清除。</strong> </td>
+<td> <strong>解释同上 针对对象变为、文件、目录、数据库记录所在的存储空间</strong> </td>
+<td> <strong>三级要求，一般情况为不符合。</strong> </td>
+</tr>
+</tbody>
+</table>
+<p> <strong>通信完整性</strong></p>
+<table>
+<colgroup>
+<col>
+<col>
+<col>    </colgroup>
+<thead>
+<tr>
+<th> <strong>基本要求</strong> </th>
+<th> 解读 </th>
+<th> <strong>符合情况</strong> </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> a）应采用校验码技术保证通信过程中数据的完整性。 </td>
+<td> 采取密码技术来保证通信过程中的数据完整性，普通加密技术无法保证密件在传输过程中不被替换，还需利用Hash函数（如MD5、SHA和MAC）用于完整性校验，但不能利用CRC生成的校验码来进行完整性校验&nbsp; </td>
+<td> 一般情况符合，测试一般用wireshark 或burp suite&nbsp;,在用户登陆，或者提交相关业务数据（Form cookies），是否存在敏感信息明文。&nbsp;                <br>也可询问开发人员，以及查看源代码部分是否有做处理。 </td>
+</tr>
+</tbody>
+</table>
+<p> <strong>通信保密性</strong>&nbsp;</p>
+<table>
+<colgroup>
+<col>
+<col>
+<col>    </colgroup>
+<thead>
+<tr>
+<th> <strong>基本要求</strong> </th>
+<th> <strong>解读</strong> </th>
+<th> 备注 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> a) 在通信双方建立连接之前，应用系统应利用密码技术进行会话初始化验证； </td>
+<td> 该项要求强调<strong>整个报文</strong>或<strong>会话</strong>过程进行加密，同时，如果在加密隧道建立之前需要传递密码等信息，则应采取密码技术来保证这些信息的安全。&nbsp;                <br>常用就是SSL、ipsec </td>
+<td> 一般情况部分符合，测试一般用wireshark 或burp suite&nbsp;,在用户登陆，或者提交相关业务数据（Form cookies），是否存在敏感信息明文。&nbsp;                <br>跟上条的需要区分的是这是属于传输上的，跟本身应用上的加密是两回事，专注于传输过程。 </td>
+</tr>
+<tr>
+<td> b) 应对通信过程中的敏感信息字段进行加密； </td>
+<td> 常用的传输加密 WEB模式需要 HTTPS 客户端至少要有L2TPVPN 或者其他加密隧道 </td>
+<td> 一般情况为不符合 HTTP为明文，L2TPVPN 客户端需要先拨号 根据具体情况判断。&nbsp;                <br>https L2TPVPN的会涉及到证书的相关问题。证书就会涉及一笔额外费用，在此不赘述。 </td>
+</tr>
+</tbody>
+</table>
+<p> <strong>抗抵赖</strong></p>
+<table>
+<colgroup>
+<col>
+<col>
+<col>    </colgroup>
+<thead>
+<tr>
+<th> 基本要求 </th>
+<th> 解读 </th>
+<th> 备注 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> <strong>a) 应具有在请求的情况下为数据原发者或接收者提供数据原发/接收证据的功能；</strong> </td>
+<td> <strong>本来是两条注意斜杠的位置 /，一个是原发证据的功能，一个是接收证据的功能，不太好理解，简单说就是溯源，可以追溯发送方和接收的具体是哪个使用者而且无法抵赖。</strong> </td>
+<td> <strong>三级要求 一般情况不符合，解决办法简单点的可以用数字签名证明身份。一般单位选择放弃此项。</strong> </td>
+</tr>
+</tbody>
+</table>
+<p> <strong>软件容错</strong></p>
+<table>
+<colgroup>
+<col>
+<col>
+<col>    </colgroup>
+<thead>
+<tr>
+<th> 基本要求 </th>
+<th> 解读 </th>
+<th> 备注 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> a) 应提供数据有效性检验功能，保证通过人机接口输入或通过通信接口输入的数据格式或长度符合系统设定要求； </td>
+<td> 在创建账户，写入业务数据的时候，是否存在最小最大字符数量限制 上传大小和种类限制以及特殊字符限制，数据有效性等 数据有效性比如： 性别一栏只能选男女 其他选择无效。 </td>
+<td> 一般情况部分符合，多数是应用对数据长度类型没有定义。不好整改一般放弃，项目如在开发维护中则可以整改。 </td>
+</tr>
+<tr>
+<td> b) 应提供自动保护功能，当故障发生时自动保护当前所有状态，保证系统能够进行恢复。 </td>
+<td> 当违反相对数据规则 如上条&nbsp;<strong>最小最大字符数量限制 上传大小和种类限制以及特殊字符限制，数据有效性等，</strong>能正确告知客户进行修正不对系统正常运行造成影响。应用业务数据需要定期备份。（有每日 每周 每月备份等） </td>
+<td> 一般情况部分符合，多数应用有些限制，但都存在过滤不严的情况。结合上面一条软件容错主要是为了防止SQL注入等攻击，以及用户输入一定超过最大值或特殊字符进行溢出攻击。记得询问应用备份情况。 </td>
+</tr>
+</tbody>
+</table>
+<p> <strong>资源控制</strong></p>
+<table>
+<colgroup>
+<col>
+<col>
+<col>    </colgroup>
+<thead>
+<tr>
+<th> <strong>基本要求</strong> </th>
+<th> 解读 </th>
+<th> 备注 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> a)&nbsp;当应用系统的通信双方中的一方在一段时间内未作任何响应，另一方应能够自动结束会话； </td>
+<td> 用户登陆应用，但没有任何操作情况应自动锁定，或登出的安全要求， 简单说超时设置。 </td>
+<td> 一般情况符合，多数WEB都有超时时间，客户端型可能没有。具体情况具体判断。 </td>
+</tr>
+<tr>
+<td> b)&nbsp;应能够对系统的最大并发会话连接数进行限制； </td>
+<td> 1、服务器的最大并发数限制。&nbsp;                <br>2、客户端单点链接服务器业务的最大连接数限制。 </td>
+<td> 一般情况不符合，多数没有设置，主要可能没遇到系统峰值的情况，建议设置。应用无法整改应在网络层适当对单点IP进行限制。 </td>
+</tr>
+<tr>
+<td> c)&nbsp;应能够对单个帐户的多重并发会话进行限制； </td>
+<td> 这里有单点登录和多点登录的概念。&nbsp;                <br>要求应用最好是单点登录，需要多点登录应限制为5个以下的数量。 </td>
+<td> 单点登录：比如QQ 你在一台电脑上登录 在另一台电脑登录之前就会下线，这种成为单点登录只能一个账户一个终端登录。&nbsp;                <br>多点登录：可以用一个账户两个终端或两个以上终端登录用户称为多点登录。&nbsp;                <br>一般情况为不符合，多数多点登录情况。应用在维护开发期可整改，否则放弃。 </td>
+</tr>
+</tbody>
+</table>
+<h2>    <strong>0×4 数据安全以及备份恢复</strong></h2>
+<p> PS: 这个部分原本条目比较少，一般是数据库的检测条目是被忽略的。</p>
+<p> 因为很多数据库没有办法进行整改主要担心影响业务，但是评测公司会评测。于是还是决定写详细一点。</p>
+<p> 此部分也不是整改重点为了自己不背锅建议不要碰数据库。改动数据任意一点都可能影响业务。</p>
+<p> <strong>身份鉴别</strong></p>
+<table>
+<colgroup>
+<col>
+<col>
+<col>    </colgroup>
+<thead>
+<tr>
+<th> <strong>基本要求</strong> </th>
+<th> <strong>解读</strong> </th>
+<th> 备注 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> a)应对登录操作系统和数据库系统的用户进行身份标识和鉴别 </td>
+<td> &nbsp;为防止操作系统用户对SQL Server数据库迚行非授权管理（系统管理员和数据库管理元分离），应选择“SQL Server和Windows”方式，并且让用户每次登录数据库时都必须输入密码（必须保证登录用户为强密码）&nbsp;                <br><strong>MSSQL 检查：</strong>&nbsp;                <br>查看身份认证方式是否为“SQL Server和Windows”。&nbsp;                <br>试图登录数据库，查看系统是否提示输入用户密码。&nbsp;                <br><strong>ORACLE检查方法</strong>&nbsp;                <br>应检查Oracle数据库系统，查看是否存在空口令戒默认口令的用户（Oracle默认满足，但应防止口令出现空口令或默认口令情况）&nbsp;                <br>默认口令，如：SYS / CHANGE_ON_INSTALL；SYSTEM/MANAGER 。&nbsp;                <br>常用弱口令：oracle:oracle/admin/ora11（ora+版本）;sys:oracle/admin; system:oralce/admin&nbsp;&nbsp; </td>
+<td> 改了密码或链接方式你知道对业务链接数据库影响是什么？别背锅。一般为不符合&nbsp; </td>
+</tr>
+<tr>
+<td> b)操作系统和数据库系统管理用户身份标识应具有不易被冒用的特点，口令应有复杂度要求并定期。 </td>
+<td> 数据库本身倒是不存在完全相同用户名情况，保证密码复杂度，并定期更换。&nbsp;                <br><strong>MSSQL 检查</strong>&nbsp;                <br>询问数据库管理员口令策略，查看有无空口令用户 。&nbsp;                <br>让管理员以SA的身份登录数据库，查看是否为弱口令&nbsp;                <br><strong>ORACLE检查</strong>查看是否启用口令复杂度凼数，执行命令：select limit from dba_profiles where profile=’DEFAULT’ and resourcename=’PASSWORDVERIFYFUNCTION’&nbsp;                <br>检查utlpwdmms.sql中“– Check for the minimum length of the password”部分中“length(password)&lt;“后的值 (密码长度） &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;                <br>查看口令管理制度以及执行记录，并选择验证。&nbsp; </td>
+<td> 一般部分符合，多数是数据库不好改密码，或密码太简单。需要配合人员登录输入下密码情况。 </td>
+</tr>
+<tr>
+<td> c)应启用登录失败处理功能，可采取结束会话、限制非法登录次数和自动退出等措施&nbsp; </td>
+<td> 为防止暴力破解数据库用户的口令，应保证数据库具有登录失败处理功能（设置非法登录次数的限制值，对超过限制值的登录终止其鉴别会话戒临时封闭帐号）&nbsp;                <br><strong>MSSQL检查</strong>&nbsp;                <br>执行命令sp_configure，查看有无登录失败处理的配置&nbsp;                <br>询问数据库管理员是否采取其他措施保证上述功能的实现&nbsp;                <br><strong>ORACLE检查</strong>执行命令：select limit from dba_profiles where profile=’DEFAULT’ and resource_name=’FAILED_LOGIN_ATTEMPTS’。（密码失败几次锁定）&nbsp;                <br>执行命令：select limit from dba_profiles where profile=’DEFAULT’ and resource_name=’PASSWORD_LOCK_TIME’ 。（锁定的时间）&nbsp; </td>
+<td> 一般情况不符合，不建议更改。 </td>
+</tr>
+<tr>
+<td> d)当对服务器进行远程管理时，应采取必要措施，防止鉴别信息在网络传输过程中被窃听&nbsp; </td>
+<td> 数据传输过程中的加密要求，SQL Server数据库可采用包括SSL在内的方式对数据迚行加密传输。其他数据传输加密的方式这里不赘述了。&nbsp;                <br>判断&nbsp;                <br>询问数据库管理员是否采取措施保证进程管理数据加密传输 。&nbsp;                <br>在数据库传输对端抓包（wireshark）也可。一般是不存在传输加密。 </td>
+<td> 一般情况不符合。一般是不存在传输加密。 </td>
+</tr>
+<tr>
+<td> e)应为操作系统和数据库系统的不同用户分配不同的用户名，确保用户名具有唯一性&nbsp; </td>
+<td> 操作系统和数据库本身满足唯一性，但是要防止不同用户使用相同的用户名登录数据库系统，不同用户分配不同账户。&nbsp;                <br>判断&nbsp;                <br>询问数据库管理员，是否为不同的登录用户分配不同的用户名，保证对一人一账号方便审计。&nbsp; </td>
+<td> &nbsp;一般不符合，共用账号情况居多。 </td>
+</tr>
+<tr>
+<td> <strong>f)应采用两种或两种以上组合的鉴别技术对管理用户进行身份鉴别</strong> </td>
+<td> <strong>双因子又来了。<br>判断<br>MSSQL 说明<br>询问数据库管理员，是否采取除身份鉴别外的其他鉴别方式（对于SQL SERVER2005以上的版本，可以采取证书的方式对存储过程进行访问控制）<br>ORACLE说明<br>包括三种方法：数据库鉴别、操作系统鉴别和密码文件鉴别。数据库鉴别方法是常见方式，其所需鉴别信息存放在在system表空间的某个表中；特殊的数据库操作，如启动、关闭数据库需要通过操作系统或者密码文件鉴别方法。<br>还可以借助应用程序服务器提供网络验证，可以引入Kerberos、RADIUS、PKI，如clt-oracle svr/radius clt-radius svr-authent svr<br>oracle数据库通过sqlnet.ora文件中的参数SQLNET.AUTHENTICATION_SERVICES【NONE|NTS】、PFILE（或SPFILE）文件中的参数REMOTE_LOGIN_PASSWORDFILE【NONE|EXCLUSIVE|SHARED】和口令文件PWDsid.ora三者协同作用实现身份认证。</strong>                </td>
+<td> <strong>三级要求 一般情况不符合 整改过于繁琐。</strong> </td>
+</tr>
+</tbody>
+</table>
+<p> <strong>访问控制</strong></p>
+<table>
+<colgroup>
+<col>
+<col>
+<col>    </colgroup>
+<thead>
+<tr>
+<th> <strong>基本要求</strong> </th>
+<th> <strong>解读</strong> </th>
+<th> 备注 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> a)应启用访问控制功能，依据安全策略控制用户对资源的访问 </td>
+<td> &nbsp;应依据安全策略限定每个角色的权限，并且为每个用户分配一个或多个角色。 &nbsp;角色概念有点像用户组概念，这里也说的是三权分立的思想。前面提过不赘述了 &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;                <br><strong>检查</strong>&nbsp;                <br>查看是否依据安全策略为角色限定了权限。（MSSQL 一般看数据库角色属性就好）&nbsp;                <br>查看是否为每个登录用户分配并限制了服务器角色&nbsp; </td>
+<td> 一般不符合，一般没有明确分配<strong>但至少应用链接数据库最好不使用sa 或者sys 之类的最高数据库管理员账户，一旦链接数据文件被拖走如 conn.aspx&nbsp;config.inc.php 类似链接数据库的文件。这个数据库权限就没了。</strong>应用不好设置的情况出于安全考虑，可以设置数据库服务器的可访问IP地址，其余的非业务运维地址全部禁止访问。 </td>
+</tr>
+<tr>
+<td> b)应根据管理用户的角色分配权限，实现管理用户的权限分离，仅授予管理用户所需的最小权限 </td>
+<td> 之前也说过的最小权限原则，用户业务需要什么权限给什么权限不给过高的权限。 &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;                <br>检查&nbsp;                <br>检查登陆数据库用户的权限。&nbsp;                <br>还要避免数据库账户和操作系统账户同名同密码情况存在。&nbsp; </td>
+<td> 一般不符合，挺多一个账户给高权限所有业务管理到底。 </td>
+</tr>
+<tr>
+<td> C)应实现操作系统和数据库系统特权用户的权限分离&nbsp; </td>
+<td> 三权分立 尽量将系统管理、审计管理和业务数据库的管理的用户权限进行分离。 &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;                <br>看除了最高级管理账户如 sa sys root 账户之外没有另外创建的 权限一样是最高的账户。 </td>
+<td> 一般情况部分符合，多是有默认账户，没有三权分立。 </td>
+</tr>
+<tr>
+<td> d)应严格限制默认帐户的访问权限，重命名系统默认帐户，修改这些帐户的默认口令&nbsp; </td>
+<td> 1：建议修改数据库默认的用户名&nbsp;                <br>2：建议修改默认用户名的口令&nbsp; </td>
+<td> 一般情况不符合或部分符合。多数因为业务原因无法重命名或者重命名有风险。应该注意修改密码长度和复杂度，确保强密码。&nbsp; </td>
+</tr>
+<tr>
+<td> e)应及时删除多余的、过期的帐户，避免共享帐户的存在&nbsp; </td>
+<td> 应删除数据库中多余的、过期的帐户，如测试帐号。还应避免一个账户多人使用的情况。&nbsp;                <br>判断&nbsp;                <br>mssql&nbsp;                <br>执行命令：select name from syslogins，询问每个帐户的作用。&nbsp;                <br>oracle&nbsp;                <br>select * from dba_users; 查看数据库里面所有用户，前提是你是有dba权限的帐号，如sys,system&nbsp;                <br>select * from all_users; &nbsp;查看你能管理的所有用户&nbsp;                <br>询问相关账户的作用。&nbsp; </td>
+<td> 一般情况不符合，一般是测试账号保留以及管理员不清楚账号作用的情况。在不清楚账号作用情况下也不是建议做任何修改操作的。 </td>
+</tr>
+<tr>
+<td> <strong>f)应对重要信息资源设置敏感</strong>&nbsp; </td>
+<td> <strong>在数据库中能对重要信息资源设置敏感标记（如公开、秘密、机密、绝密等 一般针对身份证账号 手机银行卡号等），为实现强制访问控制提供基础。<br>一般而言超级管理员账户是不受限制的。<br>判断<br>如果数据库具有强制访问功能，则查看是否启用该功能，是否对重要资源设置了敏感标记<br>oracle<br>检查是否安装 Oracle Label Security模块：select username from dba_users<br>查看是否创建策略：SELECT policy_name, status from DBA_SA_POLICIES<br>查看是否创建级别：SELECT * FROM dba_sa_levels ORDER BY level_num<br>查看标签创建情况：select * from dba_sa_labels</strong>                </td>
+<td> <strong>三级要求 一般情况不符合 &nbsp;不建议整改<br>不涉及到敏感信息可判定不适用。</strong> </td>
+</tr>
+<tr>
+<td> <strong>g)应依据安全策略严格控制用户对有敏感标记重要信息资源的操作</strong>&nbsp; </td>
+<td> <strong>结合上一条，这条要求强调控制用户对重要信息资源的操作权限。<br>判断<br>查看是否依据安全策略控制用户对重要信息资源的操作，在条件允许的情况下则可进行测试 （其实一般没条件）<br>对于ORACLE，可以执行命令：select * from dba_sa_user_labels，查看用户的标签，并选择特定的用户和表进行验证策略</strong> </td>
+<td> <strong>三级要求 对于数据库与业务不熟悉人员不建议操作测试。一般不符合。不建议整改。</strong> </td>
+</tr>
+</tbody>
+</table>
+<p> <strong>安全审计</strong></p>
+<table>
+<colgroup>
+<col>
+<col>
+<col>    </colgroup>
+<thead>
+<tr>
+<th> <strong>基本要求</strong> </th>
+<th> <strong>解读</strong> </th>
+<th> 备注 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> a)审计范围应覆盖到服务器和重要客户端上的每个操作系统用户和数据库用户 </td>
+<td> &nbsp;应检查数据库系统，查看是否开启审计功能，并且审计范围是否覆盖到每个用户&nbsp;                <br>判断&nbsp;                <br>查看是否开启审计功能，用不同的用户登录数据库系统并进行不同的操作，查看是否对每个用户都进行审计&nbsp;                <br>MSSQL&nbsp;                <br>数据库企业管理（sql server enterprise manager）-任意数据库鼠标右键属性-安全性选项卡-审核级别应勾选“全部”&nbsp;                <br>ORACLE&nbsp;&nbsp;                <br>执行命令：select value from v$parameter where name=’audit_trail’，查看是否开启审计功能&nbsp;                <br>用不同的用户登录数据库系统并进行不同的操作，在Oracle数据库中查看日志记录是否满足要求&nbsp; </td>
+<td> 一般不符合，可能由于日志产生大量日志占用空间，属于关闭状态。可以整改开启日志，但占用更多空间。如果网络层上有数据库审计设备此安全审计部分，大部分符合。 </td>
+</tr>
+<tr>
+<td> b)审计内容应包括重要用户行为、系统资源的异常使用和重要系统命令的使用等系统内重要的安全相关事件 </td>
+<td> 检查数据库系统，查看审计策略是否覆盖系统内重要的安全相关事件，例如，用户登录系统、自主访问控制的所有操作记录、重要用户行为（如增加/删除用户，删除库表）等。是否正确记录日志&nbsp;                <br>判断&nbsp;                <br>如果审计功能开启，这在条件允许的情况下进行相应操作，查看数据库是否进行了记录&nbsp;                <br>默认MSSQL 日志跟数据库文件同目录，额外定义的另说&nbsp;                <br>ORACLE&nbsp;                <br>&nbsp;show parmeter audit_trail，查看是否开启审计功能。&nbsp;                <br>show parameter audit_sys_operations，查看是否对所有sys用户的操作进行了记录。&nbsp;                <br>&nbsp;select sel,upd,del,ins from dba_obj_audit_opts，查看是否对sel,upd,del,ins操作进行了审计。&nbsp;                <br>select * from dba_stmt_audit_opts，查看审计是否设置成功。&nbsp;                <br>&nbsp;select * from dba_priv_audit_opts，查看权限审计选项。&nbsp; </td>
+<td> 一般不符合，结合上条，一般日志不开启肯定也是没有记录的。 </td>
+</tr>
+<tr>
+<td> c)审计记录应包括事件的日期、时间、类型、主体标识、客体标识和结果等&nbsp; </td>
+<td> 字面意思好理解，基本mssql oracle 开启日志功能 后生成的日志文件也都能达到要求 </td>
+<td> 一般情况不符合，多数是没开启日志记录。 </td>
+</tr>
+<tr>
+<td> <strong>d)应能够根据记录数据进行分析，并生成审计报表</strong> </td>
+<td> <strong>审计日志的导出功能<br>oralce 可以用Oracle Audit Vault等日志分析工具并查看相关报表。<br>其他的最好有三方数据库审计设备旁路用于记录日志，也都可以导出</strong> </td>
+<td> <strong>三级要求一般情况不符合，有数据库审计设备的另说。</strong> </td>
+</tr>
+<tr>
+<td> e)应保护审计进程，避免受到未预期的中断&nbsp; </td>
+<td> 应提供严格的权限管理，防止未授权关闭审计功能。&nbsp;                <br>判断&nbsp;                <br>以非授权用户（没有审计权限）登录数据库系统，试图改变审计配置选项。&nbsp;                <br>oracle&nbsp;                <br>对于ORACLE数据库，用户可以通过alter system set audit_trail=none，并重启实例关闭审计功能，查看是否成功&nbsp; </td>
+<td> 一般情况不符合，有数据库审计的除外。但数据审计设备的安全应参考网络层面的安全，需要用户密码认证等。 </td>
+</tr>
+<tr>
+<td> <strong>f)应保护审计记录，避免受到未预期的删除、修改或覆盖等</strong>&nbsp; </td>
+<td> <strong>应提供严格的权限管理，防止未预期的删除、修改或覆盖审计记录或审计文件<br>判断<br>以非授权用户试图对审计记录或文件进行操作，查看是否成功<br>对于ORACLE数据库，则查看是否严格限制用户访问审计记录的权限，如采用audit vault等</strong> </td>
+<td> <strong>三级要求 结合上条情况此条主要未授权用户能修改、删除、覆盖日志等。<br>一般情况是超级管理员才可以。有数据库审计设备会好一些。数据审计设备也应有登陆用户的权限划分。一般情况没有日志存在为不适用， 有日志才可验证是否可以删除</strong> </td>
+</tr>
+</tbody>
+</table>
+<p> <strong>资源控制</strong></p>
+<table>
+<colgroup>
+<col>
+<col>
+<col>    </colgroup>
+<thead>
+<tr>
+<th> 基本要求 </th>
+<th> 解读 </th>
+<th> 备注 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> a)应通过设定终端接入方式、网络地址范围等条件限制终端登录&nbsp; </td>
+<td> 限制可以访问数据库服务器的范围IP，端口等。&nbsp;                <br>WINDOWS&nbsp;                <br>&nbsp;防火墙 或者TCP/IP筛选可以实现&nbsp;                <br>oralce&nbsp;&nbsp;                <br>对于ORACLE数据库，则查看sqlnet.ora中是否配置了以下参数：tcp.validnode_checking，tcp.invited_nodes。&nbsp;                <br>linux 也可以启用iptables 规则来限制 </td>
+<td> 一般情况不符合，限制IP为部分符合 限制精细到IP和端口号为符合 </td>
+</tr>
+<tr>
+<td> b)应根据安全策略设置登录终端的操作超时锁定&nbsp; </td>
+<td> 当连接超时时，数据库系统自劢断开连接。&nbsp;                <br>主要针对连接数据账户 或客户端连接的，但对于应用不实际。&nbsp;                <br>MSSQL 查看&nbsp;                <br>SHOW GLOBAL VARIABLES LIKE ‘%timeout%’&nbsp;                <br>对于ORACLE数据库，查看是否对允许空闲会话的时间迚行了限制：select limit from dba_profiles where profile=‘DEFAULT’ and resource_name=‘IDLE_TIME’&nbsp; </td>
+<td> 一般情况为不符合，多数没有设置。设置担心影响应用影响速度。也会增加服务器压力。 </td>
+</tr>
+<tr>
+<td> <strong>c)应限制单个用户对系统资源的最大或最小使用限度</strong> </td>
+<td> <strong>应限制单个用户对系统资源的最大或最小使用限度，防止类似拒绝服务之类的攻击。<br>MSSQL&nbsp;<br>show variables like ‘%max_connections%’;<br>set GLOBAL max_connections = 200; (设置为200)<br>ORACLE&nbsp;<br>执行命令：select username,profile from dba_users，确定用户使用的profile，针对指定用户的profile，查看其限制（以default为例）<br>执行命令：select limit from dba_profiles where profile=‘DEFAULT’ and resource_name=’SESSIONS_PER_USER‘，查看是否对每个用户所允许的并行会话数进行了限制</strong>                </td>
+<td> <strong>三级要求 一般情况不符合，为了安全起见至少设置一个最大连接数限制。</strong> </td>
+</tr>
+</tbody>
+</table>
+<p> <strong>备份和恢复 &nbsp;</strong></p>
+<p> <strong>特别说明：此部分的备份恢复是覆盖所有层面 包括网络的建议双联路，服务器建议双机热备等。</strong></p>
+<table>
+<colgroup>
+<col>
+<col>
+<col>    </colgroup>
+<thead>
+<tr>
+<th> 技术要求 </th>
+<th> 解读 </th>
+<th> 备注 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> a)应提供数据本地备份与恢复功能，完全数据备份至少每天一次，备份介质场外存放。&nbsp; </td>
+<td> &nbsp;字面意思不解释了，有热备同步类似功能会好一些，日常备份夜间闲时做成计划任务即可，不过有些单位嫌麻烦没有每天备份。还需要备份恢复验证备份的文件是否可用。&nbsp;                <br>网络方面备份：是否双联路。是否有额外硬件备件&nbsp;                <br>服务器和应用：是否双机热备，当应用挂掉时能否及时恢复。是否有备件。&nbsp; </td>
+<td> 一般部分符合，多数情况是有备份，可能备份时间达不到每天备份 存储介质在机房内&nbsp;                <br>网络方面备份不一定每个机房能达到。服务器和应用方面的双机热备要求也是如此。&nbsp; </td>
+</tr>
+<tr>
+<td> <strong>b)应提供异地数据备份功能，利用通信网络将关键数据定时批送至备用</strong> </td>
+<td> <strong>应提供灾备中心或叫数据中心，对重要的数据提供异地数据级备份，保证当本地系统发生灾难性后果不可恢复时，利用异地保存的数据对系统数据能进行恢复。</strong> </td>
+<td> <strong>三级要求有异地容灾要求 &nbsp;就是与应用区域至少有50公里以上距离同步备份。主要还是防止一个地方地震对机房和数据造成无法挽回的损失。。一般一线银行这方面做得比较好。一般单位不符合。<br>异地容灾的相关技术和标准这里不赘述有兴趣可以了解一下</strong>&nbsp; </td>
+</tr>
+</tbody>
+</table>
+<h2>    <strong>0×5 &nbsp;等级保护通过的侧重点</strong></h2>
+<p> 1：管理层面和技术层面，管理制度的权重会高一些。大概为6 4开 &nbsp;7 3 开的样子。</p>
+<p> 2：技术层面整改建议放在 网络层面和主机层面 提高它们的分数，将较低和无法更改的平均分拉起来。</p>
+<p> 3：管理层面的评测大体有三个阶梯级 &nbsp; &nbsp; 一、是否有制度会给分 二、制度是否有表格再给分 &nbsp;三、制度是否有明细记录再给分 （建议无记录的至少补充一年半左右的出入记录申请记录等）</p>
+<p> 4：测评机构会扫描漏洞，日常漏洞扫描是需要做的，或者在测评机构扫描时屏蔽一些高危IP，可以控制仅扫描安全较好的主机。</p>
+<p> 有些测评机构出现高危漏洞是一票否决。</p>
+<h2>    <strong>0×6 等级保护题外话</strong></h2>
+<p> 1：等级保护强调纵深防御思想 &nbsp; &nbsp; &nbsp;几个关键要求出现的几个层面 如 &nbsp;审计日志要求 &nbsp;访问控制要求 &nbsp; 双因子 &nbsp;敏感信息标记&nbsp;</p>
+<p> 纵深防御思想好比 &nbsp;军事作战需要 海陆空三军协同作战一样， &nbsp;网络层面有访问控制 &nbsp;主机层面有访问控制 应用有访问控制 &nbsp;防御措施是一环套一环</p>
+<p> 2：其实制度标准文件也好，认真解读规定其实还是算严格的。只是等级保护制度在执行时 就要看人的执行力了</p>
+<p> 很多等级保护在落实的时候存在很多不严谨的问题。其实也很尴尬就像我在上条评论说的，不管你测评单位也好，负责整改的单位也好，都是需要甲方给钱的，有些会写一些不对等合同关系，比如通过才给钱，导致很多评测单位调整原本的等级保护通过标准。<strong>图片中就在去年国字头单位都中枪可见</strong>，问题还是很突出的。</p>
+<p> <strong><a href="https://image.3001.net/images/20190107/1546826195_5c32b1d3ae4ab.png" class="highslide-image" onclick="return hs.expand(this);" target="_blank"><img data-original="https://image.3001.net/images/20190107/1546826195_5c32b1d3ae4ab.png!small" src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/grey.gif"></a></strong></p>
+<noscript><img src="https://image.3001.net/images/20190107/1546826195_5c32b1d3ae4ab.png!small"></strong></p></noscript>
+<p> 引用：&nbsp;</p>
+<p> <a href="http://www.djbh.net/webdev/web/HomeWebAction.do?p=getZxdt&amp;id=8a818256675e91ab0167ba77c7d20073&amp;xx=a57ea59e9f6cf27b129f9bf21f7111ee">http://www.djbh.net/webdev/web/HomeWebAction.do?p=getZxdt&amp;id=8a818256675e91ab0167ba77c7d20073&amp;xx=a57ea59e9f6cf27b129f9bf21f7111ee</a></p>
+<p>    3：一些项目过程可能用到的文件 &nbsp;一般情况是讲文档表格打印访谈形式，根据条目一条一条去核对和验证。然后出具差距分析报告。</p>
+<p> <strong><a href="https://image.3001.net/images/20190107/1546826312_5c32b2485f10a.png" class="highslide-image" onclick="return hs.expand(this);" target="_blank"><img data-original="https://image.3001.net/images/20190107/1546826312_5c32b2485f10a.png!small" src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/grey.gif"></a></strong></p>
+<noscript><img src="https://image.3001.net/images/20190107/1546826312_5c32b2485f10a.png!small"></strong></p></noscript>
+<p> <strong><a href="https://image.3001.net/images/20190107/1546826481_5c32b2f163f11.png" class="highslide-image" onclick="return hs.expand(this);" target="_blank"><img data-original="https://image.3001.net/images/20190107/1546826481_5c32b2f163f11.png!small" src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/grey.gif"></a></strong></p>
+<noscript><img src="https://image.3001.net/images/20190107/1546826481_5c32b2f163f11.png!small"></strong></p></noscript>
+<h2>    <strong>0×7 end &nbsp;</strong></h2>
+<p> 1：写够多了 结束。</p>
+                                <div class="column-tags"><a href="https://zhuanlan.freebuf.com/">专栏</a></div>
+                                <div class="column-support">
+                                    <p class="support-mount good_num">4</p>
+                                    <a href="javascript:void (0);" data-status="0" data-id="192723" class="good"></a>
+                                </div>
+                                <script>
+                                    $('.good').on('click',function () {
+                                        var login = $(this).attr('data-status');
+                                        if(login){
+                                            var token = $('#token').val();
+                                            var id = $(this).attr('data-id');
+                                            var good = $('.good_num').text();
+                                            var _this = $(this);
+                                            var _url = document.location.href;
+                                            $.ajax({
+                                                type: "post",
+                                                url: _url,
+                                                data: {'token':token,'id':id, 'good':1},
+                                                success: function (data) {
+                                                    $('#token').val(data.token);
+                                                    if(data.code ==400){
+                                                        layer.open({
+                                                            title: '系统提示',
+                                                            btnAlign: 'c',
+                                                            content: data.msg,
+                                                            area: '278px',
+                                                        });
+                                                    }else {
+                                                        if(good){
+                                                            good++;
+                                                        }else {
+                                                            good=1;
+                                                        }
+                                                        $('.good_num').text(good);
+                                                        _this.disabled();
+                                                    }
+                                                },
+                                            })
+                                        }else {
+                                            layer.open({
+                                                title: '系统提示',
+                                                btnAlign: 'c',
+                                                content: '请先登录',
+                                                btn: ['登录'],
+                                                area: '278px',
+                                                yes: function () {
+                                                    login();
+                                                },
+                                            });
+                                        }
+                                        return false;
+                                    })
+                                    function login(){
+                                        window.location.href = 'https//www.freebuf.com/oauth';
+                                    }
+                                </script>
+                                                    </div>
+                        <div class="article-oper article-oper-new">
+                            <style>
+                                @font-face {font-family: 'iconfont';
+                                    src: url('https://static.3001.net/iconfonts/iconfont.eot'); /* IE9*/
+                                    src: url('https://static.3001.net/iconfonts/iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+                                    url('https://static.3001.net/iconfonts/iconfont.woff') format('woff'), /* chrome、firefox */
+                                    url('https://static.3001.net/iconfonts/iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+                                    url('https://static.3001.net/iconfonts/iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
+                                }
+                            </style>
+                            <div class="share-new clearfix" style="width: 100%; left: 364.587px;">
+                                <div class="share-author">
+                                                                            <a href="http://www.freebuf.com/author/redhatd" title="由 redhatd 发布" rel="author">
+                                            <img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/1546848121_5c330779b04dd.png" width="0" height="0" alt="redhatd" class="avatar avatar-50 wp-user-avatar wp-user-avatar-50 photo">                                            <!--							<img src="http://image.3001.net/2015/06/17.jpg" alt="ArthurKiller">-->
+                                        </a>
+                                        <div class="share-author-info">
+                                                                                        <a class="author-name" href="http://www.freebuf.com/author/redhatd">redhatd</a>
+                                            <!--<span class="icon-f"></span>-->
+                                            <span>
+                                <i class="colour-red">
+                                    15                                </i>
+                                篇文章</span>
+                                            <span>等级：
+                                <i class="colour-green">2</i>级
+                            </span>
+                                        </div>
+                                                                                                                    <span class="btn-box btn-box-bottom pull-left">
+                                            <button href="http://www.freebuf.com/oauth" class="btn-common1 btn-common3 btn-attention follow" data-login="0">关注</button>                                            </span>
+                                                                    </div>
+                                <div class="user-center clearfix">
+                                                                        <a href="http://www.freebuf.com/user/pm?pmaction=newmessage&amp;to=redhatd" data-toggle="tooltip" data-placement="top" title="" class="letter" target="_blank" data-original-title="私信"></a>
+                                </div>
+                                <div class="share-ctrl clearfix">
+                                                                        <div class="bdsharebuttonbox clearfix bdshare-button-style1-24 columnstatus" data-bd-bind="1489991449190" data-column="1" data-title="萌新等级保护完全指南，保证“一看就会、一做就废”（下）" data-name="灰哥的小酒馆">
+                                        <a href="http://service.weibo.com/share/share.php?url=https://www.freebuf.com/articles/security-management/192723.html&amp;title=%E8%90%8C%E6%96%B0%E7%AD%89%E7%BA%A7%E4%BF%9D%E6%8A%A4%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97%EF%BC%8C%E4%BF%9D%E8%AF%81%E2%80%9C%E4%B8%80%E7%9C%8B%E5%B0%B1%E4%BC%9A%E3%80%81%E4%B8%80%E5%81%9A%E5%B0%B1%E5%BA%9F%E2%80%9D%EF%BC%88%E4%B8%8B%EF%BC%89&amp;appkey=1343713053&amp;pic=https://image.3001.net/images/20190107/1546839631_5c32e64f4ad27.jpg!420.280&amp;searchPic=true#_loginLayer_1520574669384" data-toggle="tooltip" data-placement="top" data-cmd="tsina" title="" id="tsina" target="_blank" data-original-title="分享到新浪微博"></a>
+                                        <a href="javascript:;" data-toggle="tooltip" data-placement="top" data-cmd="weixin" title="" id="weixin" class="weixin_down" data-original-title="分享到微信">
+
+                                            <!-- 添加微信二维码显示 -->
+                                            <div class="panel-weixin" style="display: none;">
+                                                <section class="weixin-section">
+                                                    <p>
+                                                        <img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/qrcode" alt="二维码">
+                                                    </p>
+                                                </section>
+                                                <h3>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</h3>
+                                            </div>
+
+                                        </a>
+                                        <a href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://www.freebuf.com/articles/security-management/192723.html&amp;title=%E8%90%8C%E6%96%B0%E7%AD%89%E7%BA%A7%E4%BF%9D%E6%8A%A4%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97%EF%BC%8C%E4%BF%9D%E8%AF%81%E2%80%9C%E4%B8%80%E7%9C%8B%E5%B0%B1%E4%BC%9A%E3%80%81%E4%B8%80%E5%81%9A%E5%B0%B1%E5%BA%9F%E2%80%9D%EF%BC%88%E4%B8%8B%EF%BC%89&amp;desc=%E5%BF%AB%E5%8F%AB%E4%BD%A0%E7%9A%84%E5%B0%8F%E4%BC%99%E4%BC%B4%E6%9D%A5%E5%88%86%E4%BA%AB%E5%90%A7&amp;summary=&amp;pics=https://image.3001.net/images/20190107/1546839631_5c32e64f4ad27.jpg!420.280" data-toggle="tooltip" data-placement="top" data-cmd="qzone" title="" id="qzone" target="_blank" data-original-title="分享到QQ空间"></a>
+                                        <span class="share-line">|</span>
+                                    </div>
+                                </div>
+                                <div class="user-ctrl clearfix">
+                                                                            <a href="http://www.freebuf.com/oauth" id="collect" data-toggle="tooltip" data-placement="top" title="" data-original-title="收藏"></a>
+                                                                        <a href="https://www.freebuf.com/articles/security-management/192723.html#respond" data-toggle="tooltip" data-placement="top" title="" id="comments" data-original-title="评论"></a>
+                                                                        <!--					<a href="#" title="文章纠正">&#xe6e3;</a>-->
+                                    <span class="share-line">|</span>
+                                    <span class="info-alert"></span>
+                                </div>
+                            </div>
+                            <style>
+                                .share-ctrl .bdsharebuttonbox #weixin {
+                                    position: relative;
+                                }
+                                .articlecontent .panel-weixin {
+                                    position: absolute;
+                                    bottom: 25px;
+                                    left: -90px;
+                                    margin-bottom: 10px;
+                                    width: 210px;
+                                    padding: 15px;
+                                    border-radius: 2px;
+                                    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+                                    border: solid 1px #e9eaec;
+                                    background: #ffffff;
+                                    display: none;
+                                }
+                                .articlecontent section.weixin-section {
+                                    float: left;
+                                    width: 80px;
+                                    height: 80px;
+                                    margin-right: 10px;
+                                    white-space: normal;
+                                    overflow: hidden;
+                                }
+                                .articlecontent section.weixin-section img {
+                                    width: 100%;
+                                }
+                                .articlecontent .panel-weixin h3 {
+                                    font-size: 12px;
+                                    font-weight: normal;
+                                    line-height: 18px;
+                                    white-space: normal;
+                                    margin: 0px;
+                                    padding: 0px;
+                                    color: #000;
+                                }
+                            </style>
+                                                        <script>
+
+                                var column = $('.columnstatus').attr('data-column');
+                                var text = '';
+                                if(column){
+                                    var title = $('.columnstatus').attr('data-title');
+                                    var name = $('.columnstatus').attr('data-name');
+                                    text = title+' - FreeBuf专栏·'+name;
+                                }
+
+                                var direction_flag, window_w = jQuery(window).width(), afterScrollTop;
+                                if(window_w <= 480) {
+                                    $('.share-ctrl #weixin').click(function() {
+                                        layer.open({
+                                            title: '提示',
+                                            btnAlign: 'c',
+                                            content: '请使用手机浏览器自带的分享功能分享该页面',
+                                            area: '260px'
+                                        });
+                                    });
+                                }else {
+                                    jQuery('.share-ctrl .weixin_down').hover(function() {
+                                        jQuery('.share-ctrl .panel-weixin').show();
+                                    }, function() {
+                                        jQuery('.share-ctrl .panel-weixin').hide();
+                                    });
+                                    jQuery('.share-ctrl .weixin_up').hover(function() {
+                                        jQuery('.share-ctrl .weixin_qcode').show();
+                                    }, function() {
+                                        jQuery('.share-ctrl .weixin_qcode').hide();
+                                    });
+                                }
+                                //控制垂直方向分享模块的定位
+                                function shareFixVertical(){
+                                    var offsetTop = jQuery(".article-oper").get(0).offsetTop;
+                                    var win_h = jQuery(window).height();
+                                    var win_w = jQuery(window).width();
+                                    var scrollTop = document.body.scrollTop||document.documentElement.scrollTop;
+                                    var _height = offsetTop-scrollTop;
+                                    var _flag = $('.column-article').attr('data-column');
+                                    if(_flag == 1) {
+                                        if(_height>=win_h-660&&win_w>975){
+                                            var _width = jQuery("#getWidth").innerWidth()-30;
+                                            var _left = jQuery("#getWidth").offset().left+15;
+                                            jQuery(".share-new").addClass("fixed");
+                                            jQuery(".fixed").css({
+                                                width:_width,
+                                                left:_left
+                                            });
+
+                                        }else{
+                                            jQuery(".share-new").removeClass("fixed");
+                                            jQuery(".share-new").css({
+                                                width: "100%"
+                                            });
+                                        }
+                                    }else {
+                                        if(_height>=win_h-255&&win_w>975){
+                                            var _width = jQuery("#getWidth").innerWidth()-30;
+                                            var _left = jQuery("#getWidth").offset().left+15;
+                                            jQuery(".share-new").addClass("fixed");
+                                            jQuery(".fixed").css({
+                                                width:_width,
+                                                left:_left
+                                            });
+
+                                        }else{
+                                            jQuery(".share-new").removeClass("fixed");
+                                            jQuery(".share-new").css({
+                                                width: "100%"
+                                            });
+                                        }
+                                    }
+                                }
+                                //控制水平方向分享模块的定位
+                                function shareFixHorizontal(){
+                                    var _width = jQuery("#getWidth").innerWidth()-30;
+                                    var _left = jQuery("#getWidth").get(0).offsetLeft+15;
+                                    var win_w = document.documentElement.clientWidth || document.body.clientWidth;
+                                    jQuery(".fixed").css({
+                                        width:_width,
+                                        left:_left
+                                    });
+                                    if(win_w< 975){
+                                        jQuery(".share-new").css({
+                                            width: "100%",
+                                            left: "0"
+                                        });
+                                    }else{
+                                        var _width = jQuery("#getWidth").innerWidth()-30;
+                                        var _left = jQuery("#getWidth").get(0).offsetLeft+15;
+                                        jQuery(".fixed").css({
+                                            width:_width,
+                                            left:_left
+                                        });
+                                    }
+                                }
+
+                                jQuery(window).on("load",function(){
+                                    shareFixVertical();
+                                });
+
+                                jQuery(window).on("resize",function(){
+                                    shareFixHorizontal();
+                                });
+
+                                scroll( function(direction) {
+                                    if(direction == 'down') {
+                                        jQuery(".share-new").removeClass("fixed");
+                                        $(".share-new").css({
+                                            width: "100%"
+                                        });
+                                        if(window_w <= 480) {
+                                            if(afterScrollTop >= 65) {
+                                                jQuery('.main-header .header').addClass('op0');
+                                                jQuery('.main-header .header').removeClass('op1');
+                                            }
+                                        }else {
+                                            jQuery('.main-header').stop().hide();
+                                        }
+                                    }else {
+                                        shareFixVertical();
+                                        if(window_w <= 480) {
+                                            jQuery('.main-header .header').addClass('op1');
+                                            jQuery('.main-header .header').removeClass('op0');
+                                        }else {
+                                            jQuery('.main-header').stop().show();
+                                        }
+                                    }
+                                    return direction;
+                                });
+
+                                function scroll( fn ) {
+                                    var beforeScrollTop = document.body.scrollTop || document.documentElement.scrollTop,
+                                        fn = fn || function() {};
+                                    window.addEventListener("scroll", function() {
+                                        afterScrollTop = document.body.scrollTop || document.documentElement.scrollTop,
+                                            delta = afterScrollTop - beforeScrollTop;
+                                        if( delta === 0 ) return false;
+                                        direction_flag = fn( delta > 0 ? "down" : "up" );
+                                        beforeScrollTop = afterScrollTop;
+                                    }, false);
+                                }
+
+
+
+                                //tooltips提示
+                                $(function () { $("[data-toggle='tooltip']").tooltip(); });
+                            </script>
+                        </div>
+                                                                                                                    </div>
+                </div>
+                <div class="comment-list">
+      <div class="main-tit02">
+		<a rel="nofollow" class="btnbtn-default btn-comment" href="https://www.freebuf.com/articles/security-management/192723.html#respond">发表评论</a>
+        <h3>已有 <span class="color_red">7</span> 条评论
+      </h3></div>
+      <ul>
+         <li class="comment byuser comment-author-smartwy even thread-even depth-1" id="li-comment-261263">
+    <div id="comment-261263">
+        <div class="photo"> <a href="http://www.freebuf.com/author/smartwy">
+    <img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/wp-user-avatar-96x96.png"></a>
+     </div>
+    <div class="tit"> 
+	    <span class="name"> <a href="http://www.freebuf.com/author/smartwy" target="_blank">smartwy&nbsp;</a>  </span>
+        		
+		<span class="icon-f"> </span>
+		<span class="rank">(1级)</span>
+				<span class="explain">  </span>
+		<span class="time">&nbsp;2019-01-07</span>
+		<span class="time">
+                    </span>
+        <span class="useragent_output_custom"></span>
+        <span class="useragent_output_custom"></span> 
+		<span class="reply">
+		        <!-- 正常情况 -->
+           <a onclick="return addComment.moveForm( &#39;comment-261263&#39;,&#39;261263&#39;, &#39;respond&#39;,&#39;192723&#39; ) " href="https://www.freebuf.com/articles/security-management/192723.html?replytocom=261263#respond" class="comment-reply-link" rel="nofollow">回复</a>
+        	    </span>
+		<span class="floor">1楼</span>
+	</div>
+	    <div class="txt">
+	  <p class="useragent_output_custom"></p>
+      <p>这是1.0的标准还是2.0的</p>
+<div class="comment-tools">
+<div class="vote" id="vote-261263"><span id="acv_stat_261263"></span><a class="ilike_icon" id="vote4-261263" href="javascript:acv_vote(261263,1);">亮了</a>(<span id="cos_support-261263">0</span>)</div>
+<div class="dropup"><a class="dropdown-toggle btn-report" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="display:none;"> 举报</a>
+<ul class="dropdown-menu" style="display:none;bottom:auto;">
+<li><a data-id="261263" class="click_report" href="javascript:;">广告等垃圾信息</a></li>
+<li><a data-id="261263" class="click_report" href="javascript:;">不友善内容</a></li>
+<li><a data-id="261263" class="click_report" href="javascript:;">违反法律法规的内容</a></li>
+<li><a data-id="261263" class="click_report" href="javascript:;">不宜公开讨论的政治内容</a></li>
+<li><a data-id="261263" class="click_report" href="javascript:;">其他</a></li>
+</ul></div>
+</div>
+	</div></div>
+<ul class="children">
+<li class="comment odd alt depth-2" id="li-comment-261271">
+    <div id="comment-261271">
+        <div class="photo">     <img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/pic4.png">     </div>
+    <div class="tit"> 
+	    <span class="name"> redhatd </span>
+        		<span class="explain">  </span>
+		<span class="time">&nbsp;2019-01-07</span>
+		<span class="time">
+                    </span>
+        <span class="useragent_output_custom"></span>
+        <span class="useragent_output_custom"></span> 
+		<span class="reply">
+		        <!-- 正常情况 -->
+           <a onclick="return addComment.moveForm( &#39;comment-261271&#39;,&#39;261271&#39;, &#39;respond&#39;,&#39;192723&#39; ) " href="https://www.freebuf.com/articles/security-management/192723.html?replytocom=261271#respond" class="comment-reply-link" rel="nofollow">回复</a>
+        	    </span>
+		<span class="floor"></span>
+	</div>
+	    <div class="txt">
+	  <p class="useragent_output_custom"></p>
+      <p>@ smartwy&nbsp;上部分   之前的文章写的老标准 ，  新标准实施可能6月份     其实对比不同就行<br>
+，整体变化不大    新标准落地，再考虑写个对比</p>
+<div class="comment-tools">
+<div class="vote" id="vote-261271"><span id="acv_stat_261271"></span><a class="ilike_icon" id="vote4-261271" href="javascript:acv_vote(261271,1);">亮了</a>(<span id="cos_support-261271">0</span>)</div>
+<div class="dropup"><a class="dropdown-toggle btn-report" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="display:none;"> 举报</a>
+<ul class="dropdown-menu" style="display:none;bottom:auto;">
+<li><a data-id="261271" class="click_report" href="javascript:;">广告等垃圾信息</a></li>
+<li><a data-id="261271" class="click_report" href="javascript:;">不友善内容</a></li>
+<li><a data-id="261271" class="click_report" href="javascript:;">违反法律法规的内容</a></li>
+<li><a data-id="261271" class="click_report" href="javascript:;">不宜公开讨论的政治内容</a></li>
+<li><a data-id="261271" class="click_report" href="javascript:;">其他</a></li>
+</ul></div>
+</div>
+	</div></div>
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+<li class="comment byuser comment-author-263978 even thread-odd thread-alt depth-1" id="li-comment-261302">
+    <div id="comment-261302">
+        <div class="photo"> <a href="http://www.freebuf.com/author/%E7%94%A8%E6%88%B7%E5%90%8D%E4%B8%8D%E8%83%BD%E4%B8%BA%E7%A9%BA">
+    <img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/wp-user-avatar-50x50.png"></a>
+     </div>
+    <div class="tit"> 
+	    <span class="name"> <a href="http://www.freebuf.com/author/%E7%94%A8%E6%88%B7%E5%90%8D%E4%B8%8D%E8%83%BD%E4%B8%BA%E7%A9%BA" target="_blank">用户名不能为空&nbsp;</a>  </span>
+        		
+		<span class="icon-f"> <a href="http://zhuanlan.freebuf.com/" target="_blank"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/column-iden.png" title="专栏作者"></a></span>
+		<span class="rank">(1级)</span>
+				<span class="explain">  </span>
+		<span class="time">&nbsp;2019-01-08</span>
+		<span class="time">
+                    </span>
+        <span class="useragent_output_custom"></span>
+        <span class="useragent_output_custom"></span> 
+		<span class="reply">
+		        <!-- 正常情况 -->
+           <a onclick="return addComment.moveForm( &#39;comment-261302&#39;,&#39;261302&#39;, &#39;respond&#39;,&#39;192723&#39; ) " href="https://www.freebuf.com/articles/security-management/192723.html?replytocom=261302#respond" class="comment-reply-link" rel="nofollow">回复</a>
+        	    </span>
+		<span class="floor">2楼</span>
+	</div>
+	    <div class="txt">
+	  <p class="useragent_output_custom"></p>
+      <p>收藏了 多谢 <img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon_mrgreen.gif" alt=":mrgreen:" class="wp-smiley"> </p>
+<div class="comment-tools">
+<div class="vote" id="vote-261302"><span id="acv_stat_261302"></span><a class="ilike_icon" id="vote4-261302" href="javascript:acv_vote(261302,1);">亮了</a>(<span id="cos_support-261302">0</span>)</div>
+<div class="dropup"><a class="dropdown-toggle btn-report" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="display:none;"> 举报</a>
+<ul class="dropdown-menu" style="display:none;bottom:auto;">
+<li><a data-id="261302" class="click_report" href="javascript:;">广告等垃圾信息</a></li>
+<li><a data-id="261302" class="click_report" href="javascript:;">不友善内容</a></li>
+<li><a data-id="261302" class="click_report" href="javascript:;">违反法律法规的内容</a></li>
+<li><a data-id="261302" class="click_report" href="javascript:;">不宜公开讨论的政治内容</a></li>
+<li><a data-id="261302" class="click_report" href="javascript:;">其他</a></li>
+</ul></div>
+</div>
+	</div></div>
+</li><!-- #comment-## -->
+<li class="comment byuser comment-author-999 odd alt thread-even depth-1" id="li-comment-262072">
+    <div id="comment-262072">
+        <div class="photo"> <a href="http://www.freebuf.com/author/%E6%89%AE%E7%8C%AA%E5%90%83%E8%80%81%E8%99%8E999">
+    <img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/wp-user-avatar-96x96.png"></a>
+     </div>
+    <div class="tit"> 
+	    <span class="name"> <a href="http://www.freebuf.com/author/%E6%89%AE%E7%8C%AA%E5%90%83%E8%80%81%E8%99%8E999" target="_blank">扮猪吃老虎999&nbsp;</a>  </span>
+        		
+		<span class="icon-f"> </span>
+		<span class="rank">(1级)</span>
+				<span class="explain">  </span>
+		<span class="time">&nbsp;2019-01-24</span>
+		<span class="time">
+                    </span>
+        <span class="useragent_output_custom"></span>
+        <span class="useragent_output_custom"></span> 
+		<span class="reply">
+		        <!-- 正常情况 -->
+           <a onclick="return addComment.moveForm( &#39;comment-262072&#39;,&#39;262072&#39;, &#39;respond&#39;,&#39;192723&#39; ) " href="https://www.freebuf.com/articles/security-management/192723.html?replytocom=262072#respond" class="comment-reply-link" rel="nofollow">回复</a>
+        	    </span>
+		<span class="floor">3楼</span>
+	</div>
+	    <div class="txt">
+	  <p class="useragent_output_custom"></p>
+      <p> <img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon_smile.gif" alt=":smile:" class="wp-smiley">  收藏</p>
+<div class="comment-tools">
+<div class="vote" id="vote-262072"><span id="acv_stat_262072"></span><a class="ilike_icon" id="vote4-262072" href="javascript:acv_vote(262072,1);">亮了</a>(<span id="cos_support-262072">0</span>)</div>
+<div class="dropup"><a class="dropdown-toggle btn-report" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="display:none;"> 举报</a>
+<ul class="dropdown-menu" style="display:none;bottom:auto;">
+<li><a data-id="262072" class="click_report" href="javascript:;">广告等垃圾信息</a></li>
+<li><a data-id="262072" class="click_report" href="javascript:;">不友善内容</a></li>
+<li><a data-id="262072" class="click_report" href="javascript:;">违反法律法规的内容</a></li>
+<li><a data-id="262072" class="click_report" href="javascript:;">不宜公开讨论的政治内容</a></li>
+<li><a data-id="262072" class="click_report" href="javascript:;">其他</a></li>
+</ul></div>
+</div>
+	</div></div>
+</li><!-- #comment-## -->
+<li class="comment byuser comment-author-pjtazmf even thread-odd thread-alt depth-1" id="li-comment-262861">
+    <div id="comment-262861">
+        <div class="photo"> <a href="http://www.freebuf.com/author/pjtazmf">
+    <img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/wp-user-avatar-96x96.png"></a>
+     </div>
+    <div class="tit"> 
+	    <span class="name"> <a href="http://www.freebuf.com/author/pjtazmf" target="_blank">pjtazmf&nbsp;</a>  </span>
+        		
+		<span class="icon-f"> </span>
+		<span class="rank">(1级)</span>
+				<span class="explain">  </span>
+		<span class="time">&nbsp;2019-02-20</span>
+		<span class="time">
+                    </span>
+        <span class="useragent_output_custom"></span>
+        <span class="useragent_output_custom"></span> 
+		<span class="reply">
+		        <!-- 正常情况 -->
+           <a onclick="return addComment.moveForm( &#39;comment-262861&#39;,&#39;262861&#39;, &#39;respond&#39;,&#39;192723&#39; ) " href="https://www.freebuf.com/articles/security-management/192723.html?replytocom=262861#respond" class="comment-reply-link" rel="nofollow">回复</a>
+        	    </span>
+		<span class="floor">4楼</span>
+	</div>
+	    <div class="txt">
+	  <p class="useragent_output_custom"></p>
+      <p>感谢</p>
+<div class="comment-tools">
+<div class="vote" id="vote-262861"><span id="acv_stat_262861"></span><a class="ilike_icon" id="vote4-262861" href="javascript:acv_vote(262861,1);">亮了</a>(<span id="cos_support-262861">0</span>)</div>
+<div class="dropup"><a class="dropdown-toggle btn-report" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="display:none;"> 举报</a>
+<ul class="dropdown-menu" style="display:none;bottom:auto;">
+<li><a data-id="262861" class="click_report" href="javascript:;">广告等垃圾信息</a></li>
+<li><a data-id="262861" class="click_report" href="javascript:;">不友善内容</a></li>
+<li><a data-id="262861" class="click_report" href="javascript:;">违反法律法规的内容</a></li>
+<li><a data-id="262861" class="click_report" href="javascript:;">不宜公开讨论的政治内容</a></li>
+<li><a data-id="262861" class="click_report" href="javascript:;">其他</a></li>
+</ul></div>
+</div>
+	</div></div>
+</li><!-- #comment-## -->
+<li class="comment odd alt thread-even depth-1" id="li-comment-268127">
+    <div id="comment-268127">
+        <div class="photo">     <img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/pic17.png">     </div>
+    <div class="tit"> 
+	    <span class="name"> chen </span>
+        		<span class="explain">  </span>
+		<span class="time">&nbsp;2019-06-10</span>
+		<span class="time">
+                    </span>
+        <span class="useragent_output_custom"></span>
+        <span class="useragent_output_custom"></span> 
+		<span class="reply">
+		        <!-- 正常情况 -->
+           <a onclick="return addComment.moveForm( &#39;comment-268127&#39;,&#39;268127&#39;, &#39;respond&#39;,&#39;192723&#39; ) " href="https://www.freebuf.com/articles/security-management/192723.html?replytocom=268127#respond" class="comment-reply-link" rel="nofollow">回复</a>
+        	    </span>
+		<span class="floor">5楼</span>
+	</div>
+	    <div class="txt">
+	  <p class="useragent_output_custom"></p>
+      <p>等保测评是直接找测评机构好，还是测评机构服务商来服务？</p>
+<div class="comment-tools">
+<div class="vote" id="vote-268127"><span id="acv_stat_268127"></span><a class="ilike_icon" id="vote4-268127" href="javascript:acv_vote(268127,1);">亮了</a>(<span id="cos_support-268127">0</span>)</div>
+<div class="dropup"><a class="dropdown-toggle btn-report" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="display:none;"> 举报</a>
+<ul class="dropdown-menu" style="display:none;bottom:auto;">
+<li><a data-id="268127" class="click_report" href="javascript:;">广告等垃圾信息</a></li>
+<li><a data-id="268127" class="click_report" href="javascript:;">不友善内容</a></li>
+<li><a data-id="268127" class="click_report" href="javascript:;">违反法律法规的内容</a></li>
+<li><a data-id="268127" class="click_report" href="javascript:;">不宜公开讨论的政治内容</a></li>
+<li><a data-id="268127" class="click_report" href="javascript:;">其他</a></li>
+</ul></div>
+</div>
+	</div></div>
+<ul class="children">
+<li class="comment byuser comment-author-redhatd bypostauthor even depth-2" id="li-comment-268158">
+    <div id="comment-268158">
+        <div class="photo"> <a href="http://www.freebuf.com/author/redhatd">
+    <img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/1546848121_5c330779b04dd.png"></a>
+     </div>
+    <div class="tit"> 
+	    <span class="name"> <a href="http://www.freebuf.com/author/redhatd" target="_blank">redhatd&nbsp;</a>  </span>
+        		
+		<span class="icon-f"> <a href="http://zhuanlan.freebuf.com/" target="_blank"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/column-iden.png" title="专栏作者"></a></span>
+		<span class="rank">(2级)</span>
+				<span class="explain"> 来自重庆一个不想被人认识的安全人 </span>
+		<span class="time">&nbsp;2019-06-10</span>
+		<span class="time">
+                    </span>
+        <span class="useragent_output_custom"></span>
+        <span class="useragent_output_custom"></span> 
+		<span class="reply">
+		        <!-- 正常情况 -->
+           <a onclick="return addComment.moveForm( &#39;comment-268158&#39;,&#39;268158&#39;, &#39;respond&#39;,&#39;192723&#39; ) " href="https://www.freebuf.com/articles/security-management/192723.html?replytocom=268158#respond" class="comment-reply-link" rel="nofollow">回复</a>
+        	    </span>
+		<span class="floor"></span>
+	</div>
+	    <div class="txt">
+	  <p class="useragent_output_custom"></p>
+      <p>@ chen    首先是一个三方关系</p>
+<p>1：客户单位（甲方）  2：建设单位（维护单位 或安全公司） 3：测评机构</p>
+<p>客户是甲方这个好理解<br>
+建设单位是为甲方业务服务的  或者业务维护停止了，为了安全找了安全公司配合过等级保护</p>
+<p>测评机构是当地的 有测评资质的  一般当地不会超过3家  （其实关键需要测评机构的章）</p>
+<p>又因为   测评机构和安全公司或建设单位不能是同一家，，，不能又当运动员又当裁判</p>
+<p>所以 理解了吗？<br>
+简单说 安全公司或建设公司 是根据整改通过等级保护 ，测评机构只测评不整改。</p>
+<div class="comment-tools">
+<div class="vote" id="vote-268158"><span id="acv_stat_268158"></span><a class="ilike_icon" id="vote4-268158" href="javascript:acv_vote(268158,1);">亮了</a>(<span id="cos_support-268158">0</span>)</div>
+<div class="dropup"><a class="dropdown-toggle btn-report" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="display:none;"> 举报</a>
+<ul class="dropdown-menu" style="display:none;bottom:auto;">
+<li><a data-id="268158" class="click_report" href="javascript:;">广告等垃圾信息</a></li>
+<li><a data-id="268158" class="click_report" href="javascript:;">不友善内容</a></li>
+<li><a data-id="268158" class="click_report" href="javascript:;">违反法律法规的内容</a></li>
+<li><a data-id="268158" class="click_report" href="javascript:;">不宜公开讨论的政治内容</a></li>
+<li><a data-id="268158" class="click_report" href="javascript:;">其他</a></li>
+</ul></div>
+</div>
+	</div></div>
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+      </ul>
+      <div class="commentnav page01" style="padding-top:10px; text-align: center;">
+               </div>
+	  
+<script src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/ajaxfileupload.js.下载" type="text/javascript"></script>
+<div id="respond" class="comment-box">
+<input type="file" id="uploadUnit" name="upfile" class="hidden" value="">
+    <form action="https://www.freebuf.com/wp-comments-post.php" method="post" id="commentform">
+        <div id="comment-author-info">
+	    <div class="login-other">
+		  <div class="login_button login_icon_sina" title="使用新浪微博登陆" onclick="login_button_click(&#39;sina&#39;)"></div>
+          <div class="login_button login_icon_qq" title="使用腾讯QQ登陆" onclick="login_button_click(&#39;qq&#39;)"></div></div>
+        <div class="login-input">
+	    <p><label for="author">昵称</label>
+		          <input type="text" name="author" id="author" value="水灵灵" size="14" tabindex="1" aria-required="true" placeholder="请输入昵称" required="">
+        </p><span>必须</span><span>您当前尚未登录。<a class="simplemodal-login" href="http://www.freebuf.com/oauth" title="登陆">登陆？</a><a href="https://account.tophant.com/register.html" target="_blank">注册</a></span></div>
+		<div class="login-input">
+		  <p><label for="email">邮箱</label><input type="text" name="email" id="email" value="qinnuo1101@gmail.com" size="25" tabindex="2" aria-required="true" placeholder="请输入邮箱地址" required=""></p>
+		<span>必须（保密）</span>
+		</div>
+    </div>
+
+            <div id="test" class="post-area">
+      <div class="holiday"></div>
+	    <div class="comment-editor">
+			<a id="comment-smiley" href="javascript:;">表情</a><a href="javascript:;" id="imageThumb">插图</a>
+	    </div>
+        <div id="smileys">
+           <a title="mrgreen" href="javascript:grin(&#39;:mrgreen:&#39;)"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon_mrgreen.gif"></a><a title="razz" href="javascript:grin(&#39;:razz:&#39;)"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon_razz.gif"></a><a title="sad" href="javascript:grin(&#39;:sad:&#39;)"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon_sad.gif"></a><a title="smile" href="javascript:grin(&#39;:smile:&#39;)"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon_smile.gif"></a><a title="oops" href="javascript:grin(&#39;:oops:&#39;)"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon_redface.gif"></a><a title="grin" href="javascript:grin(&#39;:grin:&#39;)"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon_biggrin.gif"></a><a title="eek" href="javascript:grin(&#39;:eek:&#39;)"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon_surprised.gif"></a><a title="???" href="javascript:grin(&#39;:???:&#39;)"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon_confused.gif"></a><a title="cool" href="javascript:grin(&#39;:cool:&#39;)"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon_cool.gif"></a><a title="lol" href="javascript:grin(&#39;:lol:&#39;)"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon_lol.gif"></a><a title="mad" href="javascript:grin(&#39;:mad:&#39;)"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon_mad.gif"></a><a title="twisted" href="javascript:grin(&#39;:twisted:&#39;)"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon_twisted.gif"></a><a title="roll" href="javascript:grin(&#39;:roll:&#39;)"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon_rolleyes.gif"></a><a title="wink" href="javascript:grin(&#39;:wink:&#39;)"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon_wink.gif"></a><a title="idea" href="javascript:grin(&#39;:idea:&#39;)"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon_idea.gif"></a><a title="arrow" href="javascript:grin(&#39;:arrow:&#39;)"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon_arrow.gif"></a><a title="neutral" href="javascript:grin(&#39;:neutral:&#39;)"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon_neutral.gif"></a><a title="cry" href="javascript:grin(&#39;:cry:&#39;)"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon_cry.gif"></a><a title="?" href="javascript:grin(&#39;:?:&#39;)"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon_question.gif"></a><a title="evil" href="javascript:grin(&#39;:evil:&#39;)"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon_evil.gif"></a><a title="shock" href="javascript:grin(&#39;:shock:&#39;)"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon_eek.gif"></a><a title="!" href="javascript:grin(&#39;:!:&#39;)"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon_exclaim.gif"></a>        </div>
+         <textarea name="comment" id="comment" cols="100%" rows="7" tabindex="4" style="overflow-x:hidden; overflow-y:hidden; border:0; width:100%;" onkeydown="if(event.ctrlKey&amp;&amp;event.keyCode==13){document.getElementById(&#39;submit&#39;).click();return false};"></textarea><div id="loading" style="display: none;"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/wpspin_light.gif" style="vertical-align:middle;" alt=""> 正在提交, 请稍候...</div><div id="error" style="display: none;">#</div>
+    </div>
+      <div class="subcon but">
+      <input class="btn btn-success" type="submit" name="submit" id="submit" tabindex="5" value="提交评论(Ctrl+Enter)">
+      <a rel="nofollow" class="btn btn-default" id="cancel-comment-reply-link" href="javascript:;">取消</a>
+      <div class="checkbox"><input type="hidden" name="comment_post_ID" value="192723" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+<label for="comment_mail_notify" class="comment_mail"><input type="checkbox" name="comment_mail_notify" id="comment_mail_notify" value="comment_mail_notify" checked="checked">有人回复时邮件通知我</label></div>
+      </div>
+    <input name="Token" id="Token" type="hidden" value="zkn2pp">
+  </form>
+  </div>
+</div>	  
+<div class="commentshow">
+<div class="comments-loading">Loading...</div>
+</div>
+<script language="javascript">
+jQuery(document).ready(function($){ //Begin jQuery
+    $('.reply').click(function() {
+    var atid = '"#' + $(this).parent().attr("id") + '"';
+    var atname = $(this).parent().find('span:first').text();
+    $("#comment").val("@" + atname + " ").focus();
+});
+    $('.cancel-comment-reply a').click(function() { //点击取消回复评论清空评论框的内容
+    $("#comment").val('');
+});
+}) 
+
+jQuery(document).ready(function($) {
+    $body = (window.opera) ? (document.compatMode == "CSS1Compat" ? $('html') : $('body')) : $('html,body');//commentnav ajax
+    $(document).on('click', '.commentnav a', function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: "GET",
+            url: $(this).attr('href'),
+            beforeSend: function() {
+                $('.commentnav').remove();
+                $('.comment-list').remove();
+                $('.comments-loading').slideDown();
+            },
+            dataType: "html",
+            success: function(out) {
+                result = $(out).find('.comment-list');
+                nextlink = $(out).find('.commentnav');
+                $('.comments-loading').slideUp(550);
+                $('.comments-loading').after(result.fadeIn(800));
+                $(".comment-list img").each(function(){
+                  var url = $(this).attr("data-original");
+                  $(this).attr("src",url);
+                })
+            }
+        });
+    });    
+});
+</script>                <div class="relevant-rec">
+                    <div class="main-tit02">
+                        <h3>相关推荐</h3>
+                    </div>
+                    <div class="column-con">
+                                                <div class="column-item  clearfix">
+                            <div class="article-img"><a href="https://www.freebuf.com/column/202841.html" target="_blank"><img alt="某运营商驻场安全工程的资深甩锅经验" src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/1559729805_5cf7968d8bb17.png!240.160"></a>
+                            </div>
+                            <div class="article-des">
+                                <h4>
+                                    <a href="https://www.freebuf.com/column/202841.html" target="_blank">某运营商驻场安全工程的资深甩锅经验</a>
+                                </h4>
+                                <p class="excerpt">
+                                    <a href="https://www.freebuf.com/column/202841.html" target="_blank">某运营商驻场安全工程的资深甩锅经验</a>
+                                </p>
+                                <div class="article-meta clearfix">
+                                    <span class="name-head">
+                                        <img class="" src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/1546848121_5c330779b04dd.png">
+                                        <a href="https://www.freebuf.com/author/redhatd" title="由 redhatd 发布" rel="author">redhatd</a>
+                                    </span>
+                                    <span class="time">2019-05-21</span> <span class="read-home"><a href="javascript:;">74284</a></span>
+                                    <span class="comment" style=""><a href="javascript:;">5</a></span>
+                                </div>
+                            </div>
+                        </div>
+                                                <div class="column-item  clearfix">
+                            <div class="article-img"><a href="https://www.freebuf.com/column/202977.html" target="_blank"><img alt="大事情 简单说 等保2.0与1.0不同之处" src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/1557294927_5cd26f4f41167.jpg!240.160"></a>
+                            </div>
+                            <div class="article-des">
+                                <h4>
+                                    <a href="https://www.freebuf.com/column/202977.html" target="_blank">大事情 简单说 等保2.0与1.0不同之处</a>
+                                </h4>
+                                <p class="excerpt">
+                                    <a href="https://www.freebuf.com/column/202977.html" target="_blank">大事情 简单说 等保2.0与1.0不同之处</a>
+                                </p>
+                                <div class="article-meta clearfix">
+                                    <span class="name-head">
+                                        <img class="" src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/1546848121_5c330779b04dd.png">
+                                        <a href="https://www.freebuf.com/author/redhatd" title="由 redhatd 发布" rel="author">redhatd</a>
+                                    </span>
+                                    <span class="time">2019-05-08</span> <span class="read-home"><a href="javascript:;">82705</a></span>
+                                    <span class="comment" style=""><a href="javascript:;">7</a></span>
+                                </div>
+                            </div>
+                        </div>
+                                                <div class="column-item  clearfix">
+                            <div class="article-img"><a href="https://www.freebuf.com/column/199002.html" target="_blank"><img alt="基于 Android APP 安全测试流程（二）" src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/1553237478_5c9485e614c5d.png!240.160"></a>
+                            </div>
+                            <div class="article-des">
+                                <h4>
+                                    <a href="https://www.freebuf.com/column/199002.html" target="_blank">基于 Android APP 安全测试流程（二）</a>
+                                </h4>
+                                <p class="excerpt">
+                                    <a href="https://www.freebuf.com/column/199002.html" target="_blank">大体介绍 APP的键盘测试 抓包分析APP交互数据 业务功能测试  合规性测试</a>
+                                </p>
+                                <div class="article-meta clearfix">
+                                    <span class="name-head">
+                                        <img class="" src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/1546848121_5c330779b04dd.png">
+                                        <a href="https://www.freebuf.com/author/redhatd" title="由 redhatd 发布" rel="author">redhatd</a>
+                                    </span>
+                                    <span class="time">2019-03-28</span> <span class="read-home"><a href="javascript:;">47749</a></span>
+                                    <span class="comment" style=""><a href="javascript:;">2</a></span>
+                                </div>
+                            </div>
+                        </div>
+                                                <div class="column-item last clearfix">
+                            <div class="article-img"><a href="https://www.freebuf.com/column/196665.html" target="_blank"><img alt="基于 Android APP 安全测试流程（一）" src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/1552989808_5c90be70e78ba.png!240.160"></a>
+                            </div>
+                            <div class="article-des">
+                                <h4>
+                                    <a href="https://www.freebuf.com/column/196665.html" target="_blank">基于 Android APP 安全测试流程（一）</a>
+                                </h4>
+                                <p class="excerpt">
+                                    <a href="https://www.freebuf.com/column/196665.html" target="_blank">基于 Android APP   APK解包与逆向 安全测试流程  客户端程序安全、敏感信息安全</a>
+                                </p>
+                                <div class="article-meta clearfix">
+                                    <span class="name-head">
+                                        <img class="" src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/1546848121_5c330779b04dd.png">
+                                        <a href="https://www.freebuf.com/author/redhatd" title="由 redhatd 发布" rel="author">redhatd</a>
+                                    </span>
+                                    <span class="time">2019-03-08</span> <span class="read-home"><a href="javascript:;">355881</a></span>
+                                    <span class="comment" style=""><a href="javascript:;">1</a></span>
+                                </div>
+                            </div>
+                        </div>
+                                            </div>
+                </div>
+                            </div>
+                </div>
+            </div>
+</div>
+
+<div class="report-bg"></div>
+<div class="course-container" id="report-form">
+        <div class="course-con">
+            <p class="close report-close"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/1557046213_5ccea3c5f1ff3.png" alt=""></p>
+            <div class="course-tit01"><h3>填写个人信息</h3></div>
+            <input type="hidden" id="report-id" value="192723">
+            <div class="course-form" data-id="">
+                <div class="form-item clearfix item-input " data-type="1">
+                    <div class="lable-con">姓名</div>
+                    <div class="input-con" data-must="1">
+                        <input type="text" id="form-name" class="form-control" placeholder="" value="">
+                    </div>
+                </div>
+            </div>
+            <div class="course-form" data-id="">
+                <div class="form-item clearfix item-input " data-type="1">
+                    <div class="lable-con">电话</div>
+                    <div class="input-con" data-must="1">
+                        <input type="text" id="form-phone" class="form-control" placeholder="" value="">
+                    </div>
+                </div>
+            </div>
+            <div class="course-form" data-id="">
+                <div class="form-item clearfix item-input " data-type="1">
+                    <div class="lable-con">邮箱</div>
+                    <div class="input-con" data-must="1">
+                        <input type="text" id="form-email" class="form-control" placeholder="" value="">
+                    </div>
+                </div>
+            </div>
+            <div class="course-form" data-id="">
+                <div class="form-item clearfix item-input " data-type="1">
+                    <div class="lable-con">公司</div>
+                    <div class="input-con" data-must="1">
+                        <input type="text" id="form-company" class="form-control" placeholder="" value="">
+                    </div>
+                </div>
+            </div>
+            <div class="course-form" data-id="">
+                <div class="form-item clearfix item-input " data-type="1">
+                    <div class="lable-con">行业</div>
+                    <div class="input-con" data-must="1">
+                        <input type="text" id="form-trade" class="form-control" placeholder="" value="">
+                    </div>
+                </div>
+            </div>
+            <div class="course-form" data-id="">
+                <div class="form-item clearfix item-input " data-type="1">
+                    <div class="lable-con">职位</div>
+                    <div class="input-con" data-must="1">
+                        <input type="text" id="form-job" class="form-control" placeholder="" value="">
+                    </div>
+                </div>
+            </div>
+            <div class="error-tips report-error"></div>
+            <div class="course-btn btn-box"><button type="button" class="btn-success btn-lg btn-round report-submit">提交</button></div>
+        </div>
+    </div>
+<script type="text/javascript">
+  $(window).load(function() {
+    $('#slider').nivoSlider();
+  });
+  $('#contenttxt img').removeAttr('height');
+  $('#contenttxt img').wrap(function(){
+    if(!$(this).parent().attr('href')){
+      var imgurl = $(this).attr('data-original');
+      if(imgurl.substr(-6)=='!small'){
+        imgurl = imgurl.substring(0,imgurl.length-6);
+      }
+      return '<a href="' + imgurl + '" class="highslide-image" onclick="return hs.expand(this);" target="_blank"></a>';
+    }
+  })
+</script>
+    <script type="text/javascript">
+        getWidth();
+
+        $(window).resize(function () {
+            getWidth();
+        });
+        function getWidth() {
+            var windowWidth = $(window).width();
+            $('#contenttxt iframe').each(function(index) {
+                var src = $(this).attr('src');
+                if (windowWidth < 768) {
+                    $(this).attr('src', src + '&width=270&height=200');
+                } else {
+                    $(this).attr('src', src + '&width=640&height=498');
+                }
+            })
+        }
+        $('.collect-form').on('click',function () {
+            $('#report-form').show();
+            $('.report-bg').show();
+        })
+        $('.report-close').click(function () {
+            $('#report-form').hide();
+            $('.report-bg').hide();
+            $('.report-error').hide();
+        });
+        $(document).on('click', '.report-submit', function () {
+            var token = $("#report-token").val();
+            var name = $('#form-name').val();
+            var id = $('#report-id').val();
+            var email = $('#form-email').val();
+            var phone = $('#form-phone').val();
+            var company = $('#form-company').val();
+            var trade = $('#form-trade').val();
+            var job = $('#form-job').val();
+            var _url = 'https://www.freebuf.com/verify';
+            var _this = window.location.href;
+            if(!name){
+                $('#form-name').focus();
+                $('.report-error').empty().append('姓名不能为空').show();
+                return;
+            }
+            if(!phone){
+                $('#form-phone').focus();
+                $('.report-error').empty().append('电话不能为空').show();
+                return;
+            }
+            if(!email){
+                $('#form-email').focus();
+                $('.report-error').empty().append('邮箱不能为空').show();
+                return;
+            }
+            if(!company){
+                $('#form-company').focus();
+                $('.report-error').empty().append('公司不能为空').show();
+                return;
+            }
+            if(!trade){
+                $('#form-trade').focus();
+                $('.report-error').empty().append('行业不能为空').show();
+                return;
+            }
+            if(!job){
+                $('#form-job').focus();
+                $('.report-error').empty().append('职位不能为空').show();
+                return;
+            }
+            $.ajax({
+                type: "post",
+                url: _url,
+                data: {'token':token,'id':id,'report':name,'email':email,'phone':phone,'company':company,'trade':trade,'job':job,'report_status':1},
+                success: function(data){
+                    if(data.token){
+                        jQuery('#report-token').val(data.token)
+                    }
+                    if(data.code == 200){
+                        jQuery('<form action="'+_this+'" method="post" ><input type="text" name="report_download" value="1"></form>').appendTo('body').submit().remove();
+                        $('#report-form').hide();
+                        $('.report-bg').hide();
+                    }else{
+                        if(data.msg){
+                            $('.report-error').empty().append(data.msg).show();
+                        }
+                    }
+                }
+            });
+        })
+        $('.download-form').on('click',function () {
+            var _url = window.location.href;
+            jQuery('<form action="'+ _url +'" method="post" ><input type="text" name="report_download" value="1"></form>').appendTo('body').submit().remove();
+        })
+    </script>
+<script src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/comments-ajax.js.下载" type="text/javascript"></script>
+<script type="text/javascript" src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/jquery.nivo.slider.pack.js.下载"></script>
+<!----------footer---------->
+<div class="footer">
+  <div class="container">
+    <div class="footer-list ">
+      <h3>FREEBUF</h3>
+      <ul>
+        <li><a href="http://www.freebuf.com/dis">免责声明</a></li>
+        <li><a href="http://my.freebuf.com/AgreeProtocol/duty">协议条款</a></li>
+        <li><a href="http://www.freebuf.com/news/others/864.html">关于我们</a></li>
+        <li><a href="http://www.freebuf.com/jobs/40386.html">加入我们</a></li>
+      </ul>
+    </div>
+    <div class="footer-list ">
+      <h3>广告及服务</h3>
+      <ul>
+        <li><a target="_blank" href="mailto:root@freebuf.com">寻求报道</a></li>
+        <li><a href="http://www.freebuf.com/advertise">广告合作</a></li>
+        <li><a target="_blank" href="mailto:help@freebuf.com">联系我们</a></li>
+        <li><a href="http://www.freebuf.com/friends">友情链接</a></li>
+      </ul>
+    </div>
+    <div class="footer-list ">
+      <h3>关注我们</h3>
+      <ul>
+        <li><div class="weixin-pannel weixin"><a class="qr" href="javascript:void(0);"><span class="g-icon-qr1">官方微信</span><i></i></a></div></li>
+        <li><a rel="nofollow" target="_blank" href="http://weibo.com/freebuf">新浪微博</a></li>
+        <li><a rel="nofollow" target="_blank" href="http://t.qq.com/freebuf">腾讯微博</a></li>
+        <li><a rel="nofollow" target="_blank" href="http://twitter.com/freebuf">Twitter</a></li>
+      </ul>
+    </div>
+    <div class="footer-list ">
+      <h3>赞助商</h3>
+      <ul>
+        <li><a rel="nofollow" target="_blank" href="https://cloud.tencent.com/?freebuf"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/tcloud-logo.png" height="25"></a></li>
+        <li style="padding:6px 0 6px;"><a rel="nofollow" target="_blank" href="http://www.aliyun.com/?freebuf"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/ali.png"></a></li>
+        <li><a rel="nofollow" target="_blank" href="http://www.upyun.com/?freebuf"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/upyun.png"></a></li>
+        <li style="padding:6px 0 0;"><a rel="nofollow" target="_blank" href="https://www.trustasia.com/?freebuf"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/ad-yzcx.png"></a></li>
+      </ul>
+    </div>
+    <div class="footer-list ">
+      <ul>
+      </ul>
+    </div>
+    <div class="footer-logo  pull-right"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/freebufrobot_shendanjie.png"></div>
+  </div>
+  <div class="copyright"><div class="container"><p>Copyright © 2019 WWW.FREEBUF.COM All Rights Reserved <a rel="nofollow" target="_blank" href="http://www.miitbeian.gov.cn/">沪ICP备13033796号</a></p><span><a rel="nofollow" target="_blank" href="http://click.aliyun.com/m/1336/?freebuf"><img src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/icon-aly.png"></a></span></div></div>
+</div>
+
+<div class="bottom_tools" style="bottom: 40px;">
+    <ul>
+        <li class="scroll-up" id="scrollUp" style="display: block;"><a href="javascript:;" title="飞回顶部"></a></li>
+        <li class="fb-tips">
+            <a href="javascript:;" title="意见反馈"></a>
+            <div class="tips-wrap" style="">
+                <div class="item">
+                    <label>反馈内容</label>
+                    <textarea id="feedback-content" placeholder="请留下您对FreeBuf的意见和建议，我们将为您提供更好的产品和服务！"></textarea>
+                </div>
+                <div class="item">
+                    <label>联系方式</label>
+                    <input type="text" id="feedback-contact" placeholder="请输入您的邮箱联系方式">
+                </div>
+                <div class="item">
+                    <div class="star_score">
+                        <a href="javascript:void(0)" data-id="1"></a>
+                        <a href="javascript:void(0)" data-id="2"></a>
+                        <a href="javascript:void(0)" data-id="3"></a>
+                        <a href="javascript:void(0)" data-id="4"></a>
+                        <a href="javascript:void(0)" data-id="5"></a>
+                    </div>
+                    <p class="score-text">可以给我们打个分吗？</p>
+                </div>
+                                <div class="item item-code">
+                    <label>验证码</label>
+                    <input type="text" id="yzm" placeholder="请输入验证码">
+                    <img id="captcha" width="80px" height="30px" src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/captcha" onclick="this.src = &#39;/captcha?sid=&#39; + Math.random(); this.blur(); return false">
+                </div>
+                                <div class="btn-wrap">
+                    <a href="javascript:;" class="feedback">提交</a>
+                    <p class="error feedback-error"></p>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<script>
+    $('.star_score > a').click(function() {
+        $(this).addClass('active');
+        $(this).siblings().removeClass('active');
+    });
+    $('.star_score > a').hover(function() {
+        $(this).siblings().removeClass('active');
+    });
+    $(document).on('click', function() {
+        $('.bottom_tools .tips-wrap').hide(500);
+    });
+    $('.bottom_tools ul li.fb-tips').click(function(event) {
+        var evt = event || evt;
+        evt.stopPropagation();
+        $(this).find('.tips-wrap').toggle(500);
+    });
+    $('.bottom_tools .tips-wrap').click(function(event) {
+        var evt = evt || event;
+        evt.stopPropagation();
+        $(this).show();
+    });
+    $('.feedback').on('click',function () {
+        var content = $('#feedback-content').val();
+        if(!content){
+            $('#feedback-content').focus();
+            $('.feedback-error').text('反馈内容不能为空！').show();
+            return;
+        }
+        var contact = $('#feedback-contact').val();
+        if(!contact){
+            $('#feedback-contact').focus();
+            $('.feedback-error').text('联系方式不能为空！').show();
+            return;
+        }
+        var score = $('.star_score').children('.active').attr('data-id')
+        if(!score){
+            $('.feedback-error').text('给FreeBuf打个分吧！').show();
+            return;
+        }
+        var yzm = $('#yzm').val();
+        var _url = 'https://www.freebuf.com/verify';
+        $.ajax({
+            type: "post",
+            url: _url,
+            data: {'content':content,'contact':contact,'score':score,'feedback_status':1,'yzm':yzm},
+            success: function (data) {
+                $("#captcha").trigger('click')
+                if(data.code ==200){
+                    layer.open({
+                        title: '系统提示',
+                        btnAlign: 'c',
+                        content: data.msg,
+                        area: '278px',
+                    });
+                }else {
+                    layer.open({
+                        title: '系统提示',
+                        btnAlign: 'c',
+                        content: data.msg,
+                        area: '278px',
+                    });
+                }
+            },
+        })
+    })
+
+    $(document).on('click', '.appeal-wrap-public .appeal-main', function(event) {
+        var evt = event || evt;
+        evt.stopPropagation();
+        $('.appeal-wrap-public').show();
+    });
+    $(document).on('click', '.appeal-main .close', function(event) {
+        var evt = event || evt;
+        evt.stopPropagation();
+        $('.appeal-wrap').hide();
+    });
+    $(document).on('click', '.appeal-main .appeal-footer .btn-sure', function(event) {
+        var evt = event || evt;
+        evt.stopPropagation();
+        $('.appeal-wrap-public').hide();
+    });
+
+    $('.complain').on('click',function () {
+        var _url = 'https://www.freebuf.com/verify';
+        var token = $('#complain_token').val();
+        $.ajax({
+            type: "post",
+            url: _url,
+            data: {'complain_token':token,'complain_status':1},
+            success: function (data) {
+            },
+        })
+    })
+</script>
+
+<!----------footer end----------> 
+<script src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/backtop.js.下载"></script>
+<script type="text/javascript">
+jQuery(function(){	
+	jQuery('.tabPanes ul li').click(function(){
+		jQuery(this).addClass('hit').siblings().removeClass('hit');
+		jQuery('.panesl>div:eq('+jQuery(this).index()+')').show().siblings().hide();	
+	})
+	jQuery('.vulbox-nav').click(function(e) { 
+        e.stopPropagation(); 
+    });  
+})
+</script>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fcc53db168808048541c6735ce30421f5' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/h.js.下载" type="text/javascript"></script>
+<img alt="css.php" src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/css.php" width="1" height="1"><script type="text/javascript">
+jQuery(function() {
+    jQuery(".simditor pre").each(function(i, block){
+        hljs.highlightBlock(block);    
+    });
+    hljs.initHighlightingOnLoad();
+});
+</script>
+<script>
+/* <![CDATA[ */
+var rcGlobal = {
+	serverUrl		:'https://www.freebuf.com',
+	infoTemp		:'%REVIEWER% on %POST%',
+	loadingText		:'Loading',
+	noCommentsText	:'No comments',
+	newestText		:'&laquo; 最新',
+	newerText		:'&laquo; 新一点',
+	olderText		:'旧一点 &raquo;',
+	showContent		:'1',
+	external		:'1',
+	avatarSize		:'32',
+	avatarPosition	:'left',
+	anonymous		:'Anonymous'
+};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./萌新等级保护完全指南，保证“一看就会、一做就废”（下） - FreeBuf专栏·灰哥的小酒馆_files/wp-recentcomments-jquery.js.下载"></script>
+
+
+<div class="highslide-container" style="padding: 0px; border: none; margin: 0px; position: absolute; left: 0px; top: 0px; width: 100%; z-index: 1001; direction: ltr;"><a class="highslide-loading" title="点击关闭" href="javascript:;" style="position: absolute; top: -9999px; opacity: 0.75; z-index: 1;">正在加载中...</a><div style="display: none;"></div><div class="highslide-viewport highslide-viewport-size" style="padding: 0px; border: none; margin: 0px; visibility: hidden;"></div><table cellspacing="0" style="padding: 0px; border: none; margin: 0px; visibility: hidden; position: absolute; border-collapse: collapse; width: 0px;"><tbody style="padding: 0px; border: none; margin: 0px;"><tr style="padding: 0px; border: none; margin: 0px; height: auto;"><td style="padding: 0px; border: none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;https://www.freebuf.com/buf/plugins/auto-highslide/images/graphics/outlines/rounded-white.png&quot;) 0px 0px; height: 20px; width: 20px;"></td><td style="padding: 0px; border: none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;https://www.freebuf.com/buf/plugins/auto-highslide/images/graphics/outlines/rounded-white.png&quot;) 0px -40px; height: 20px; width: 20px;"></td><td style="padding: 0px; border: none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;https://www.freebuf.com/buf/plugins/auto-highslide/images/graphics/outlines/rounded-white.png&quot;) -20px 0px; height: 20px; width: 20px;"></td></tr><tr style="padding: 0px; border: none; margin: 0px; height: auto;"><td style="padding: 0px; border: none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;https://www.freebuf.com/buf/plugins/auto-highslide/images/graphics/outlines/rounded-white.png&quot;) 0px -80px; height: 20px; width: 20px;"></td><td class="rounded-white highslide-outline" style="padding: 0px; border: none; margin: 0px; position: relative;"></td><td style="padding: 0px; border: none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;https://www.freebuf.com/buf/plugins/auto-highslide/images/graphics/outlines/rounded-white.png&quot;) -20px -80px; height: 20px; width: 20px;"></td></tr><tr style="padding: 0px; border: none; margin: 0px; height: auto;"><td style="padding: 0px; border: none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;https://www.freebuf.com/buf/plugins/auto-highslide/images/graphics/outlines/rounded-white.png&quot;) 0px -20px; height: 20px; width: 20px;"></td><td style="padding: 0px; border: none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;https://www.freebuf.com/buf/plugins/auto-highslide/images/graphics/outlines/rounded-white.png&quot;) 0px -60px; height: 20px; width: 20px;"></td><td style="padding: 0px; border: none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;https://www.freebuf.com/buf/plugins/auto-highslide/images/graphics/outlines/rounded-white.png&quot;) -20px -20px; height: 20px; width: 20px;"></td></tr></tbody></table></div></body></html>

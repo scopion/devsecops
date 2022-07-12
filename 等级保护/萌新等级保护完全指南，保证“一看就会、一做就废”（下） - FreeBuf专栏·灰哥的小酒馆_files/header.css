@@ -1,0 +1,861 @@
+.clearfix:after {
+    clear: both;
+    content: "";
+    visibility: hidden;
+    display: block;
+    height: 0;
+}
+.clearfix {
+    zoom: 1;
+}
+a:hover {
+    text-decoration: none;
+}
+.triangle-down {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #FFFFFF;
+    float: right;
+    margin: 8px 0 0 8px;
+}
+.triangle-up {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid #FFFFFF;
+    float: right;
+    margin: 8px 0 0 8px;
+}
+.pt45 {
+    padding-top: 45px;
+}
+.mt25 {
+    margin-top: 26px;
+}
+/*下拉菜单*/
+.classify-btn {
+    width: 110px;
+    padding: 6px 10px;
+    background-color: #3fa065;
+    position: relative;
+    border-radius: 5px;
+    display: inline-block;
+    float: left;
+}
+.classify-btn > a {
+    font-size: 13px;
+    color: #FFFFFF;
+}
+.classify-btn > a i {
+    font-style: normal;
+}
+.classify-btn .list-item {
+    width: 90%;
+    position: absolute;
+    left: 0;
+    top: 35px;
+    line-height: 20px;
+    border: 1px solid #3fa065;
+    border-radius: 5px;
+    overflow: hidden;
+    display: none;
+    background-color: #FFFFFF;
+    padding: 5px;
+    font-size: 13px;
+    z-index: 99999;
+}
+.classify-btn .list-item li {
+    padding: 5px 10px;
+}
+.classify-btn .list-item li > a,
+.classify-btn .list-item li a:hover,
+.classify-btn .list-item li a:active,
+.classify-btn .list-item li a:link {
+    color: #000000;
+}
+.classify-btn .list-item li:hover {
+    background-color: #f2f2f2;
+}
+.btn-child {
+    background-color: #FFFFFF;
+    border: 1px solid #e1e4e2;
+    border-radius: 5px;
+    padding: 5px 0;
+    min-width: 100%;
+}
+.btn-child hr {
+    height: 1px;
+    color: #cccccc;
+    background-color: #f1f1f1;
+    border: none;
+    margin: 5px 0;
+}
+.btn-child li {
+    padding: 0 15px;
+    line-height: 25px;
+}
+.btn-child li a {
+    display: block;
+    text-decoration: none;
+    color: #9b9b9b;
+}
+.btn-child li a > span {
+    position: relative;
+}
+.btn-child li a .icon-dot {
+    position: absolute;
+    display: block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: red;
+    top: 3px;
+    right: -7px;
+}
+.btn-child li a .icon-dot2 {
+    right: -10px;
+}
+.btn-child li:hover,
+.btn-child li.active {
+    background-color: #e1e4e2;
+}
+.btn-child li:hover a,
+.btn-child li.active a {
+    color: #3fa065;
+}
+.btn-child li:nth-of-type(1) {
+    margin-bottom: 10px;
+}
+.btn-child li:nth-of-type(1) a {
+    border-bottom: 1px solid #f1f1f1;
+    color: #3F3F3F;
+    max-width: 99px;
+    max-height: 30px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    padding-bottom: 10px;
+    cursor: default;
+    font-weight: bold;
+}
+.btn-child li:nth-of-type(1):hover,
+.btn-child li:nth-of-type(1).active {
+    background-color: #fff;
+}
+.btn-child li:nth-of-type(1):hover a,
+.btn-child li:nth-of-type(1).active a {
+    color: #3F3F3F;
+}
+/*头部*/
+.header {
+    width: 100%;
+    height: 65px;
+    position: fixed;
+    background-color: #242321;
+    left: 0;
+    top: 0;
+    z-index: 999999;
+    transition: opacity 0.2s;
+    -moz-transition: opacity 0.2s;
+    -webkit-transition: opacity 0.2s;
+    -o-transition: opacity 0.2s;
+    position: relative;
+}
+.header.op1 {
+    opacity: 1;
+}
+.header.op0 {
+    opacity: 0;
+}
+.header .header-container {
+    padding-right: 50px;
+}
+.header .header-container .header-logo {
+    float: left;
+    width: 240px;
+    background: url(https://image.3001.net/images/new/logo-big.png) no-repeat 45px center;
+}
+.header .header-container .header-logo a {
+    display: block;
+    width: 75%;
+    height: 65px;
+    margin: 0 auto;
+}
+.header .header-container .nav {
+    display: inline-block;
+}
+.header .header-container .nav .nav-child {
+    padding-left: 0px;
+    margin-bottom: 0;
+}
+.header .header-container .nav .nav-child > li {
+    float: left;
+    line-height: 64px;
+    position: relative;
+}
+.header .header-container .nav .nav-child > li > a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0 20px;
+}
+.header .header-container .nav .nav-child > li:hover, .header .header-container .nav .nav-child > li.hover {
+    background-color: #282726;
+    color: #ffffff;
+}
+.header .header-container .nav .nav-child > li:hover .triangle-down-04, .header .header-container .nav .nav-child > li.hover .triangle-down-04 {
+    border-top: 5px solid #ffffff;
+    -moz-transform:rotateZ(180deg);
+    -webkit-transform:rotateZ(180deg);
+    -o-transform:rotateZ(180deg);
+    transform:rotateZ(180deg);
+}
+.header .header-container .nav .nav-child > li.active > a {
+    color: #FFFFFF;
+}
+.header .header-container .nav .nav-child > li:hover > a, .header .header-container .nav .nav-child > li.hover > a {
+    color: #FFFFFF;
+}
+.header .header-container a, .header .header-container a:hover {
+    text-decoration: none;
+}
+.header .header-container .nav .nav-child > li > a {
+    color: #98a0a0;
+    font-size: 14px;
+}
+.header .header-container .nav .nav-child > li > a:hover, .header .header-container .nav .nav-child > li > a:active, .header .header-container .nav .nav-child > li > a:visited, .header .header-container .nav .nav-child > li > a:linked{
+    text-decoration: none;
+}
+.header .header-container .nav .nav-child > li .icon-betr,
+.header .header-container .nav .nav-child > li .icon-hot,
+.header .header-container .nav .nav-child > li .icon-news{
+    position: absolute;
+    z-index: 9;
+}
+.header .header-container .nav .nav-child > li .icon-betr {
+    width: 30px;
+    height: 15px;
+    background: url(https://image.3001.net/images/new/icon-batr.gif) no-repeat center;
+    right: -5px;
+    top: 15px;
+}
+.header .header-container .nav .nav-child > li .icon-hot {
+    width: 25px;
+    height: 14px;
+    background: url(https://image.3001.net/images/new/hotnew.gif) no-repeat left top;
+    left: 65px;
+    top: 15px;
+}
+.header .header-container .nav .nav-child > li .icon-news {
+    z-index: 2;
+    float: left;
+    width: 22px;
+    height: 14px;
+    background: url(https://image.3001.net/images/new/hotnew.gif) no-repeat 0px -14px;
+    right: 0;
+    top: 15px;
+}
+.header .header-container .triangle-down-04 {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 5px solid #98a0a0;
+    margin: 31px 0 0 3px;
+    transition:0.5s;
+    -moz-transition:-moz-transform 0.5s; /* Firefox 4 */
+    -webkit-transition:-webkit-transform 0.5s; /* Safari and Chrome */
+    -o-transition:-o-transform 0.5s; /* Opera */
+}
+.header .header-container .read-classify .triangle-down-w {
+    border-top: 5px solid #FFFFFF;
+}
+.header .dropdown-menu {
+    padding: 30px 0;
+    background-color: #282726;
+    color: #ffffff;
+    border-radius: 0px;
+    border: none;
+    font-size: 14px;
+    position: absolute;
+    top: 61px;
+    left: 0px;
+    display: none;
+    width: 100%;
+    min-height: 180px;
+    text-align: center;
+}
+.header .dropdown-menu.hover {
+    display: block;
+}
+.header .dropdown-menu .menu {
+    margin: 0;
+    padding: 0;
+}
+.header .dropdown-menu .menu > li {
+    width: 19%;
+    display: inline-block;
+    background: url('https://image.3001.net/images/header/line.png') no-repeat right center;
+}
+.header .dropdown-menu .menu > li a {
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 14px;
+    position: relative;
+    text-align: center;
+    font-size: 13px;
+    display: inline-block;
+    color: #ffffff;
+}
+.header .dropdown-menu .menu > li a:hover, .header .dropdown-menu .menu > li a:link, .header .dropdown-menu .menu > li a:visited {
+    text-decoration: none;
+}
+.header .dropdown-menu .menu > li.last {
+    background: none;
+}
+.header .dropdown-menu .menu > li a > span {
+    display: block;
+}
+.header .dropdown-menu li a > .img {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto;
+}
+.header .dropdown-menu li a > .img img {
+    transition: 0.2s;
+    -moz-transition:-moz-transform 0.2s; /* Firefox 4 */
+    -webkit-transition:-webkit-transform 0.2s; /* Safari and Chrome */
+    -o-transition:-o-transform 0.2s; /* Opera */
+}
+.header .dropdown-menu li a:hover .img img {
+    -webkit-transform:translateY(-3px);
+    -moz-transform:translateY(-3px);
+    -ms-transform:translateY(-3px);
+    -o-transform:translateY(-3px);
+    transform:translateY(-3px);
+}
+.header .dropdown-menu li a > .name{
+    font-size: 16px;
+    font-weight: 600;
+    margin: 10px 0 5px 0;
+}
+.header .dropdown-menu li a > .intro{
+    font-size: 12px;
+    opacity: 0.9;
+}
+.header .dropdown-menu li b {
+    line-height: 22px;
+}
+.header .dropdown-menu.read-menu, .header .dropdown-menu.company-menu, .header .dropdown-menu.user-menu { border: none; }
+.header .read-menu .menu .nav-item {
+    margin-top: 15px;
+}
+.header .read-menu .menu > li {
+    width: 33%;
+    background: none;
+    text-align: left;
+    float: left;
+}
+.header .read-menu .menu > li a {
+    margin: 0 15px 15px 0;
+    background: url(https://image.3001.net/images/new/nav-line.gif) no-repeat right 3px;
+    color: #d4d1d1;
+    text-align: left;
+    display: inline-block;
+    width: auto;
+    padding-right: 15px;
+    font-size: 13px;
+}
+.header .read-menu .menu > li a.last {
+    background: none;
+}
+.header .read-menu .menu > li a:hover {
+    color: #3399ff;
+    text-decoration: underline;
+}
+.header .header-container .header-right {
+    float: right;
+    width: auto;
+    color: #FFFFFF;
+    font-size: 14px;
+}
+.header .header-container .header-right .header-icon {
+    float: left;
+    font-family: "PingFang SC", "Lantinghei SC", "Helvetica Neue", Helvetica, Arial, "Microsoft YaHei", 微软雅黑, STHeitiSC-Light, simsun, 宋体, "WenQuanYi Zen Hei", "WenQuanYi Micro Hei", sans-serif;
+}
+.header .header-container .header-right .header-icon > ul > li {
+    float: left;
+    width: 50px;
+    height: 65px;
+    position: relative;
+}
+.header .header-container .header-right .header-icon > ul {
+    padding: 0;
+    margin: 0;
+}
+.header .header-container .header-right .login-before .header-icon > ul > li > a {
+    opacity: 1;
+}
+.header .header-container .header-right .header-icon > ul > li:hover > a {
+    background-color: #282727;
+    opacity: 1;
+}
+.header .header-container .header-right .header-icon > ul > li > a {
+    display: block;
+    text-align: center;
+    opacity: 0.8;
+    padding-top: 37px;
+    height: 65px;
+    position: relative;
+}
+.header .header-container .header-right .header-icon .icon-dot {
+    position: absolute;
+    display: block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: red;
+    right: 14px;
+    top: 13px;
+}
+.header .header-container .header-right .header-icon > ul > li.icon-zhaopin > a .icon-dot {
+    right: 13px;
+    top: 15px;
+}
+.header .header-container .header-right .header-icon > ul > li.icon-article > a .icon-dot {
+    right: 14px;
+    top: 15px;
+}
+.header .header-container .header-right .header-icon > ul > li.icon-contribute > a .icon-dot {
+    right: 13px;
+    top: 14px;
+}
+.header .header-container .header-right .header-icon > ul > li.icon-checkin > a .icon-dot {
+    right: 20px;
+    top: 12px;
+}
+.header .header-container .header-right .header-icon > ul > li > a span {
+    font-size: 12px;
+    color: #ffffff;
+    padding-top: 45px;
+}
+.header .header-container .header-right .header-icon > ul > li.icon-search a span {
+    background: url(https://image.3001.net/images/new/btn-srh-white.png) no-repeat center;
+}
+.header .header-container .header-right .header-icon > ul > li.icon-contribute a span {
+    background: url(https://image.3001.net/images/header/icon-contribute-small.png) no-repeat center;
+}
+.header .header-container .header-right .header-icon > ul > li.icon-zhaopin a span {
+    background: url(https://image.3001.net/images/header/icon-company-small.png) no-repeat center;
+}
+.header .header-container .header-right .header-icon > ul > li.icon-company a span {
+    background: url(https://image.3001.net/images/header/icon-company-small.png) no-repeat center;
+}
+.header .header-container .header-right .header-icon > ul > li.icon-column a span {
+    background: url(https://image.3001.net/images/header/icon-column-small.png) no-repeat center;
+}
+.header .header-container .header-right .header-icon > ul > li.icon-article a span {
+    background: url(https://image.3001.net/images/header/icon-aiticle-small.png) no-repeat center;
+}
+.header .header-container .header-right .header-icon > ul > li.icon-deliver a span {
+    background: url(https://image.3001.net/images/header/icon-deliver-small.png) no-repeat center;
+}
+.header .header-container .header-right .header-icon > ul > li.icon-service a span {
+    background: url(https://image.3001.net/images/header/icon-company-small.png) no-repeat center;
+}
+.header .header-container .header-right .header-icon > ul > li.icon-checkin a span {
+    background: url(https://image.3001.net/images/header/icon-checkin-small.png) no-repeat center;
+}
+.header .header-container .header-right .header-icon > ul > li.icon-resume a span {
+    background: url(https://image.3001.net/images/header/icon-resume-small.png) no-repeat center;
+}
+.header .header-container .header-right .header-icon > ul > li.icon-like a span {
+    background: url(https://image.3001.net/images/header/icon-like-small.png) no-repeat center;
+}
+.header .header-container .header-right .header-icon > ul > li.icon-login a span {
+    background: url(https://image.3001.net/images/header/icon-login-small.png) no-repeat center;
+}
+.header .header-container .header-right .header-icon > ul > li.icon-login:hover a span {
+    background: url(https://image.3001.net/images/header/icon-login-hover.png) no-repeat center;
+    color: #31b16c;
+}
+.header .header-container .header-right .header-icon > ul > li.icon-reg a span {
+    background: url(https://image.3001.net/images/header/icon-reg-small.png) no-repeat center;
+}
+.header .header-container .header-right .header-icon > ul > li.icon-reg:hover a span {
+    background: url(https://image.3001.net/images/header/icon-reg-hover.png) no-repeat center;
+    color: #31b16c;
+}
+.header .header-container .header-right .header-icon > ul > li.icon-service:hover > ul {
+    display: block;
+}
+.header .header-container .header-right .header-icon > ul > li .icon-children {
+    position: absolute;
+    top: 65px;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    left: -20px;
+    display: none;
+}
+.header .header-container .header-right .header-icon > ul > li .icon-children > li {
+    width: 90px;
+}
+.header .header-container .header-right .header-icon > ul > li .icon-children > li:hover a {
+    background-color: #373737;
+    color: #2ab26a;
+}
+.header .header-container .header-right .header-icon > ul > li .icon-children > li a {
+    display: block;
+    padding: 10px 0;
+    font-size: 12px;
+    color: #ffffff;
+    background-color: #282727;
+}
+.header .header-container .header-right .header-icon > ul > li .icon-children > li .icon-text {
+    background: none;
+    position: relative;
+}
+.header .header-container .header-right .header-icon > ul > li .icon-children > li .icon-text .icon-dot {
+    right: -8px;
+    top: 0;
+}
+.header .header-container .loginSign {
+    float: right;
+    font-size: 13px;
+}
+/*.header .header-container .login-before {
+  line-height: 65px;
+}
+.header .header-container .login-before a {
+  color: #FFFFFF;
+  margin: 0 5px;
+}*/
+
+.header .header-container .login-after {
+    position: relative;
+    margin-left: 25px;
+}
+.header .header-container .login-after .user-info {
+    padding-top: 12px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    color: #32b16c;
+}
+.header .header-container .login-after .user-info img {
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    border: solid 2px #31b16c;
+}
+.header .header-container .login-after .user-info .user-name {
+    float: left;
+    display: inline-block;
+    max-width: 102px;
+    overflow: hidden;
+    padding-left: 20px;
+    padding-right: 5px;
+    background: url(https://image.3001.net/images/new/icon-people.png) no-repeat left center;
+}
+.header .header-container .login-after .user-info .triangle-down {
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #32b16c;
+}
+.header .header-container .login-after .user-info:hover {
+    cursor: pointer;
+}
+.header .header-container .login-after .user-info .icon-dot {
+    position: absolute;
+    display: block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: red;
+    right: 11px;
+    top: 25px;
+}
+.header .header-container .login-after .login-after-child {
+    position: absolute;
+    right: 0;
+    top: 55px;
+    z-index: 9999;
+    min-width: 131px;
+    display: none;
+}
+.header .header-container .search-form-inner {
+    float: left;
+    margin: -3px 20px 0 0;
+    position: relative;
+    overflow: hidden;
+    width: 180px;
+    height: 33px;
+    margin-top: 18px;
+}
+.header .header-container .search-form-inner .searchdisplayico {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url(https://image.3001.net/images/new/btn-srh-white.png) no-repeat center;
+    margin: 6px 5px 0 0;
+    cursor: pointer;
+    float: right;
+}
+.header .header-container .search-form-inner .search-col {
+    width: 180px;
+    position: absolute;
+    right: 0px;
+    top: 0;
+    display: none;
+}
+.search-form-inner .search-form-text .form-group .form-control {
+    border: 1px solid #2ab26a;
+    background-color: #242321;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+}
+.search-form-inner .search-form-text input {
+    color: #fff;
+}
+.search-form-inner .search-form-text .submit {
+    border: none;
+    outline: none;
+    background: url(https://image.3001.net/images/new/btn-srh-green.png) no-repeat 20px 8px;
+}
+.header .header-container .btn-publish {
+    float: left;
+    width: 85px;
+    height: 30px;
+    margin-top: 18px;
+    text-align: center;
+    background-color: #43A588;
+    border-radius: 5px;
+    font-size: 13px;
+    position: relative;
+    margin-right: 20px;
+}
+.header .header-container .btn-publish > a {
+    line-height: 30px;
+}
+.header .header-container .btn-publish a:hover,
+.header .header-container .btn-publish a:active,
+.header .header-container .btn-publish a:link,
+.header .header-container .btn-publish a:visited {
+    color: #FFFFFF;
+}
+.header .header-container .btn-publish .btn-publish-child {
+    position: absolute;
+    left: 0px;
+    top: 30px;
+    width: 85px;
+    display: none;
+    padding-top: 5px;
+    min-width: 130px;
+}
+.header .header-container .btn-publish .btn-publish-child li {
+    text-align: left;
+}
+.header .header-container .btn-publish .btn-publish-child li a {
+    display: block;
+    color: #9b9b9b;
+}
+.header .header-container .btn-publish .btn-publish-child li:hover,
+.header .header-container .btn-publish .btn-publish-child li.active {
+    background-color: #f5f5f5;
+}
+.header .header-container .btn-publish:hover {
+    background-color: #3fa065;
+}
+.header .header-container .btn-publish:hover .btn-publish-child {
+    display: block;
+}
+.header .header-container .nav-small {
+    display: none;
+}
+/*在1589像素以下的屏幕里*/
+@media (max-width: 1589px) {
+    .arti-list {
+        margin-left: 220px;
+    }
+}
+@media (max-width: 1440px) {
+    .header .header-container {
+        padding-right: 20px;
+    }
+    .header .header-container .header-logo {
+        width: 170px;
+        height: 65px;
+        background: url(https://image.3001.net/images/new/logo-small.png) no-repeat 35px center;
+    }
+    .header .header-container .header-logo a {
+        display: block;
+        height: 65px;
+    }
+    .header .header-container .nav .nav-child > li > a {
+        padding: 0 12px;
+    }
+    .header .header-container .nav .nav-child > li .icon-hot {
+        left: 55px;
+    }
+    .header .header-container .btn-publish .btn-publish-child {
+        min-width: 105px;
+    }
+    .header .header-container .search-form-inner {
+        margin-right: 15px;
+    }
+    .header .header-container .btn-publish {
+        margin-right: 15px;
+    }
+    /*.header .header-container .nav .nav-child > li .icon-betr {
+        left: 35px;
+    }*/
+}
+@media (max-width: 1366px) {
+    .header .header-container .nav .nav-child > li > a {
+        padding: 0 9px;
+    }
+    .header .header-container .nav .nav-child > li:first-child {
+        display: none;
+    }
+    .header .header-container .nav .nav-child > li[data-value='wenku-menu'] {
+        display: none;
+    }
+}
+/*pad及移动端*/
+@media (max-width: 992px) {
+    /*最上方的头部*/
+    .header .header-container .nav {
+        display: none;
+    }
+    .header .header-container .header-right {
+        display: none;
+    }
+    .header .dropdown-menu {
+        display: none;
+    }
+    .header .header-container .nav-small {
+        display: block;
+        float: right;
+        margin-top: 15px;
+        width: 36px;
+        height: 32px;
+        border-radius: 3px;
+        font-family: 'iconfont';
+        font-size: 14px;
+        text-align: center;
+        line-height: 30px;
+        background-color: #43A588;
+    }
+    .header .header-container .nav-small > a {
+        color: #FFFFFF;
+    }
+    .header .header-container .nav-small .nav-child {
+        position: absolute;
+        z-index: 9999999;
+        width: 100%;
+        left: 0px;
+        top: 65px;
+        text-align: left;
+        background-color: #282726;
+        display: none;
+        padding-left: 0;
+    }
+    .header .header-container .nav-small .nav-child > li {
+        border-bottom: 1px solid #201f1f;
+        position: relative;
+    }
+    .header .header-container .nav-small .nav-child .icon-arrow {
+        position: absolute;
+        top: 20px;
+        right: 15px;
+        display: block;
+        width: 22px;
+        height: 11px;
+        background: url('https://image.3001.net/images/header/icon-arrow.png') no-repeat center;
+        transition:0.5s;
+        -moz-transition:-moz-transform 0.5s; /* Firefox 4 */
+        -webkit-transition:-webkit-transform 0.5s; /* Safari and Chrome */
+        -o-transition:-o-transform 0.5s; /* Opera */
+    }
+    .header .header-container .nav-small .nav-child .icon-arrow.bottom {
+        transform:rotate(180deg);
+        -ms-transform:rotate(180deg); 	/* IE 9 */
+        -moz-transform:rotate(180deg); 	/* Firefox */
+        -webkit-transform:rotate(180deg); /* Safari 和 Chrome */
+        -o-transform:rotate(180deg); 	/* Opera */
+    }
+    .header .header-container .nav-small .nav-child > li > a {
+        display: block;
+        padding: 10px 20px;
+        color: #ffffff;
+        font-size: 15px;
+        font-family: "微软雅黑";
+        text-decoration: none;
+    }
+    .header .header-container .nav-small .nav-child li.active {
+        color: #3fa065;
+    }
+    .header .header-container .nav-small .nav-child li > a:hover {
+        color: #3fa065;
+        text-decoration: none;
+    }
+    .header .header-container .nav-small:hover {
+        background-color: #3fa065;
+    }
+    .header .header-container .li > a > b {
+        display: none;
+    }
+    .header .header-container .dropdown-menu {
+        left: 0;
+        top: 45px;
+    }
+    .header .header-container .nav-small .nav-child .nav-child2 > li {
+        padding: 5px 0;
+    }
+    .header .header-container .nav-small .nav-child .read-classify > li {
+        padding: 10px 0;
+    }
+    .header .header-container .nav-small .nav-child .nav-child2 strong{
+        color: #bfc1c0;
+    }
+    .header .header-container .nav-small .nav-child .nav-item a {
+        margin: 0 15px 15px 0;
+        background: url(https://image.3001.net/images/new/nav-line.gif) no-repeat right 3px;
+        padding-right: 15px;
+        color: #949897;
+    }
+    .header .header-container .nav-small .nav-child .nav-item a.last {
+        background: none;
+    }
+    .header .header-container .nav-small .nav-child2 {
+        display: none;
+        border: 1px solid #333232;
+        padding: 0 35px;
+    }
+    .header .header-container .nav-small .nav-child2 > li > a {
+        padding: 4px 0;
+    }
+}
+@media (max-width: 480px) {
+    .header .header-container .header-logo {
+        background-position: 20px center;
+    }
+    .header .header-container .nav-small {
+        margin-top: 19px;
+        width: 32px;
+        height: 28px;
+        line-height: 26px;
+    }
+    .main-header {
+        top: 0;
+    }
+    .column-article {
+        margin-top: 65px;
+    }
+}

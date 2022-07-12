@@ -1,0 +1,24 @@
+yum install bzip2* -y
+yum install lbzip2* -y
+
+
+
+$ git clone https://github.com/thinkst/opencanary
+$ cd opencanary
+$ python setup.py install
+
+
+
+$ pip install opencanary
+$ pip install scapy pcapy # optional
+$ pip install rdpy
+
+
+wget https://pypi.python.org/packages/0f/88/18bb0eddb483033e35b1b84bdf9de4cedb8906ece178e2d921451282b3c8/Twisted-14.0.2.tar.bz2
+
+
+$ . env/bin/activate
+$ opencanaryd --start
+
+
+Twisted-14.0.2°²×°Î»ÖÃ /opt/opencanary/env/bin/twistd

