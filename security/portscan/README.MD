@@ -1,0 +1,9 @@
+每天9-18点每半小时运行一次敏感端口告警脚本：everyday_find_.py
+
+每天早10:05、中14:05、晚18:05定时执行敏感端口告警脚本：everyday_find_zyl_dingshi.py
+
+每天定时15点执行全端口告警脚本：everyday_find_allphone_zyl.py
+
+将全端口信息同步至portscan库中：insert_all_into_portscan.py 
+
+每月月底发送邮件，每天17点统计截至目前未知当月的发现的敏感服务数量：portstatistical_mail.py
